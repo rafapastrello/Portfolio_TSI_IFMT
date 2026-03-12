@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fundamentos de Front End — Rafaela Pastrello</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        poppins: ['Poppins', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    },
+                    keyframes: {
+                        aparecerCima: {
+                            '0%': { opacity: '0', transform: 'translateY(24px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        piscar: {
+                            '0%,100%': { opacity: '1' },
+                            '50%': { opacity: '0.4' }
+                        },
+                        blob: {
+                            '0%,100%': { borderRadius: '60% 40% 55% 45% / 50% 60% 40% 50%' },
+                            '50%': { borderRadius: '40% 60% 45% 55% / 60% 40% 60% 40%' }
+                        },
+                        slideIn: {
+                            '0%': { opacity: '0', transform: 'translateX(-16px)' },
+                            '100%': { opacity: '1', transform: 'translateX(0)' }
+                        },
+                        typewriter: {
+                            '0%': { width: '0' },
+                            '100%': { width: '100%' }
+                        },
+                        cursorBlink: {
+                            '0%,100%': { borderRightColor: '#22c55e' },
+                            '50%': { borderRightColor: 'transparent' }
+                        }
+                    },
+                    animation: {
+                        aparecerCima: 'aparecerCima 0.6s ease forwards',
+                        piscar: 'piscar 2s ease-in-out infinite',
+                        blob: 'blob 7s ease-in-out infinite',
+                        slideIn: 'slideIn 0.5s ease forwards',
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        .tag-html {
+            background: rgba(239, 68, 68, 0.1);
+            color: #f87171;
+            border-color: rgba(239, 68, 68, 0.2);
+        }
+
+        .tag-css {
+            background: rgba(59, 130, 246, 0.1);
+            color: #60a5fa;
+            border-color: rgba(59, 130, 246, 0.2);
+        }
+
+        .tag-js {
+            background: rgba(234, 179, 8, 0.1);
+            color: #facc15;
+            border-color: rgba(234, 179, 8, 0.2);
+        }
+
+        .tag-design {
+            background: rgba(168, 85, 247, 0.1);
+            color: #c084fc;
+            border-color: rgba(168, 85, 247, 0.2);
+        }
+
+        .tag-misc {
+            background: rgba(16, 185, 129, 0.1);
+            color: #34d399;
+            border-color: rgba(16, 185, 129, 0.2);
+        }
+
+        .progress-bar {
+            background: linear-gradient(90deg, #22c55e, #16a34a);
+            border-radius: 999px;
+            height: 6px;
+            transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .code-block {
+            font-family: 'Fira Code', monospace;
+            background: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .code-header {
+            background: #161b22;
+            border-bottom: 1px solid #30363d;
+            padding: 10px 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .dot-red {
+            background: #ff5f57;
+        }
+
+        .dot-yellow {
+            background: #ffbd2e;
+        }
+
+        .dot-green {
+            background: #28c840;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 19px;
+            top: 32px;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, #22c55e 0%, #374151 100%);
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .skill-card:hover .progress-bar {
+            filter: brightness(1.2);
+        }
+
+        .nav-pill {
+            transition: all 0.2s;
+        }
+
+        .nav-pill:hover {
+            background: rgba(34, 197, 94, 0.1);
+            color: #22c55e;
+        }
+
+        .nav-pill.active {
+            background: rgba(34, 197, 94, 0.15);
+            color: #22c55e;
+            border-color: rgba(34, 197, 94, 0.3);
+        }
+
+        /* Syntax highlight colors */
+        .kw {
+            color: #ff79c6;
+        }
+
+        .fn {
+            color: #50fa7b;
+        }
+
+        .str {
+            color: #f1fa8c;
+        }
+
+        .tag-syn {
+            color: #ff79c6;
+        }
+
+        .attr {
+            color: #50fa7b;
+        }
+
+        .val {
+            color: #f1fa8c;
+        }
+
+        .cm {
+            color: #6272a4;
+            font-style: italic;
+        }
+
+        .prop {
+            color: #8be9fd;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-900 text-gray-100 antialiased font-poppins">
+
+    <!-- NAVEGAÇÃO -->
+    <nav class="sticky top-0 z-50 bg-gray-900/80 backdrop-blur-md border-b border-gray-800">
+        <div class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="index.html" class="text-base font-extrabold text-white hover:text-green-500 transition-colors">
+                portfólio<span class="text-green-500">.</span>
+            </a>
+            <div class="hidden md:flex items-center gap-2">
+                <a href="#sobre-disciplina"
+                    class="nav-pill text-sm font-medium text-gray-400 px-4 py-1.5 rounded-full border border-transparent">Sobre</a>
+                <a href="#atividades"
+                    class="nav-pill text-sm font-medium text-gray-400 px-4 py-1.5 rounded-full border border-transparent">Atividades</a>
+                <a href="#habilidades"
+                    class="nav-pill text-sm font-medium text-gray-400 px-4 py-1.5 rounded-full border border-transparent">Habilidades</a>
+            </div>
+            <a href="index.html#disciplinas"
+                class="inline-flex items-center gap-2 text-sm font-semibold px-5 py-2 rounded-full border border-gray-700 text-gray-300 hover:border-green-500 hover:text-green-500 transition-all duration-200">
+                ← Voltar
+            </a>
+        </div>
+    </nav>
+
+    <!-- BREADCRUMB -->
+    <div class="max-w-5xl mx-auto px-6 pt-6 pb-2">
+        <div class="flex items-center gap-2 text-xs text-gray-600">
+            <a href="index.html" class="hover:text-green-500 transition-colors">Portfólio</a>
+            <span>/</span>
+            <a href="index.html#disciplinas" class="hover:text-green-500 transition-colors">Disciplinas</a>
+            <span>/</span>
+            <span class="text-green-500 font-medium">Fundamentos de Front End</span>
+        </div>
+    </div>
+
+    <!-- HERO DA DISCIPLINA -->
+    <section class="relative max-w-5xl mx-auto px-6 pt-10 pb-20 overflow-hidden">
+        <div
+            class="absolute -top-20 -right-20 w-96 h-96 rounded-full bg-green-500/8 blur-3xl animate-blob pointer-events-none">
+        </div>
+        <div class="absolute top-20 -left-16 w-56 h-56 rounded-full bg-blue-500/5 blur-2xl pointer-events-none"></div>
+
+        <div class="relative z-10 flex flex-col md:flex-row items-start gap-12">
+            <div class="flex-1 animate-aparecerCima">
+                <!-- Badge da disciplina -->
+                <div class="flex items-center gap-3 mb-6">
+                    <span
+                        class="inline-flex items-center gap-2 text-xs font-semibold px-3 py-1.5 rounded-full bg-green-500/10 text-green-500 border border-green-500/20">
+                        <span class="w-2 h-2 rounded-full bg-green-500 animate-piscar"></span>
+                        Em andamento · 1° Semestre 2026
+                    </span>
+                    <span
+                        class="text-xs font-medium px-3 py-1.5 rounded-full bg-gray-800 text-gray-400 border border-gray-700">TSI
+                        — IFMT</span>
+                </div>
+
+                <!-- Ícone + Título -->
+                <div class="flex items-center gap-4 mb-5">
+                    <div
+                        class="w-16 h-16 rounded-2xl bg-green-500/10 border border-green-500/20 flex items-center justify-center text-4xl flex-shrink-0">
+                        🎨
+                    </div>
+                    <div>
+                        <h1 class="text-3xl md:text-4xl font-extrabold leading-tight text-white">
+                            Fundamentos de<br /><span class="text-green-500">Front End</span>
+                        </h1>
+                    </div>
+                </div>
+
+                <p class="text-gray-400 text-sm leading-relaxed mb-6 max-w-lg">
+                    Disciplina focada na construção de interfaces modernas para a web. Do HTML semântico ao JavaScript
+                    interativo,
+                    passando por CSS avançado — aqui aprendo a transformar ideias em experiências visuais reais.
+                </p>
+
+                <!-- Tags de tecnologia -->
+                <div class="flex flex-wrap gap-2 mb-6">
+                    <span class="tag-html text-[11px] font-semibold px-3 py-1.5 rounded-full border">HTML5</span>
+                    <span class="tag-css text-[11px] font-semibold px-3 py-1.5 rounded-full border">CSS3</span>
+                    <span class="tag-css text-[11px] font-semibold px-3 py-1.5 rounded-full border">Tailwind</span>
+                    <span class="tag-design text-[11px] font-semibold px-3 py-1.5 rounded-full border">Bootstrap</span>
+                    <span class="tag-misc text-[11px] font-semibold px-3 py-1.5 rounded-full border">Responsividade</span>
+                    <span class="tag-js text-[11px] font-semibold px-3 py-1.5 rounded-full border">JavaScript</span>
+                    <span class="tag-js text-[11px] font-semibold px-3 py-1.5 rounded-full border">React</span>
+                    <span class="tag-design text-[11px] font-semibold px-3 py-1.5 rounded-full border">UI Design</span>
+                </div>
+
+                <!-- Stats rápidas -->
+                <div class="flex flex-wrap gap-3">
+                    <div class="px-5 py-3 rounded-xl bg-gray-800 border border-gray-700 text-center">
+                        <p class="text-lg font-extrabold text-green-500">4</p>
+                        <p class="text-[11px] text-gray-500 font-medium">Atividades</p>
+                    </div>
+                    <div class="px-5 py-3 rounded-xl bg-gray-800 border border-gray-700 text-center">
+                        <p class="text-lg font-extrabold text-white">3</p>
+                        <p class="text-[11px] text-gray-500 font-medium">Projetos</p>
+                    </div>
+                    <div class="px-5 py-3 rounded-xl bg-gray-800 border border-gray-700 text-center">
+                        <p class="text-lg font-extrabold text-green-500">72h</p>
+                        <p class="text-[11px] text-gray-500 font-medium">Carga horária</p>
+                    </div>
+                    <div class="px-5 py-3 rounded-xl bg-gray-800 border border-gray-700 text-center">
+                        <p class="text-lg font-extrabold text-yellow-400">●●●○</p>
+                        <p class="text-[11px] text-gray-500 font-medium">Progresso</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bloco de código decorativo -->
+            <div class="w-full md:w-80 animate-aparecerCima [animation-delay:.2s] flex-shrink-0">
+                <div class="code-block text-xs leading-relaxed">
+                    <div class="code-header">
+                        <div class="dot dot-red"></div>
+                        <div class="dot dot-yellow"></div>
+                        <div class="dot dot-green"></div>
+                        <span class="ml-2 text-gray-500 font-mono text-[11px]">index.html</span>
+                    </div>
+                    <div class="p-4 font-mono text-[12px] leading-6 overflow-x-auto">
+                        <div><span class="cm">&lt;!-- Rafaela Pastrello --&gt;</span></div>
+                        <div><span class="tag-syn">&lt;html&gt;</span></div>
+                        <div class="pl-4"><span class="tag-syn">&lt;head&gt;</span></div>
+                        <div class="pl-8"><span class="tag-syn">&lt;title&gt;</span><span
+                                class="val">Portfólio</span><span class="tag-syn">&lt;/title&gt;</span></div>
+                        <div class="pl-4"><span class="tag-syn">&lt;/head&gt;</span></div>
+                        <div class="pl-4"><span class="tag-syn">&lt;body&gt;</span></div>
+                        <div class="pl-8"><span class="tag-syn">&lt;h1</span> <span class="attr">class</span>=<span
+                                class="val">"hero"</span><span class="tag-syn">&gt;</span></div>
+                        <div class="pl-12"><span class="str">Hello, World! 👋</span></div>
+                        <div class="pl-8"><span class="tag-syn">&lt;/h1&gt;</span></div>
+                        <div class="pl-4"><span class="tag-syn">&lt;/body&gt;</span></div>
+                        <div><span class="tag-syn">&lt;/html&gt;</span></div>
+                    </div>
+                </div>
+
+                <!-- Segundo snippet — CSS -->
+                <div class="code-block text-xs leading-relaxed mt-3">
+                    <div class="code-header">
+                        <div class="dot dot-red"></div>
+                        <div class="dot dot-yellow"></div>
+                        <div class="dot dot-green"></div>
+                        <span class="ml-2 text-gray-500 font-mono text-[11px]">style.css</span>
+                    </div>
+                    <div class="p-4 font-mono text-[12px] leading-6">
+                        <div><span class="prop">.hero</span> {</div>
+                        <div class="pl-4"><span class="attr">color</span>: <span class="val">#22c55e</span>;</div>
+                        <div class="pl-4"><span class="attr">font-size</span>: <span class="val">2rem</span>;</div>
+                        <div class="pl-4"><span class="attr">animation</span>: <span class="fn">fadeIn</span> <span
+                                class="val">0.6s</span>;</div>
+                        <div>}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SOBRE A DISCIPLINA -->
+    <section id="sobre-disciplina" class="reveal border-t border-gray-800 bg-gray-800/30">
+        <div class="max-w-5xl mx-auto px-6 py-16">
+            <div class="flex items-center gap-3 mb-8">
+                <span class="block w-10 h-1 bg-green-500 rounded-full"></span>
+                <h2 class="text-2xl font-bold text-white">Sobre a Disciplina</h2>
+            </div>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="md:col-span-2">
+                    <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                        <span class="text-white font-semibold">Fundamentos de Front End</span> é a disciplina onde
+                        teoria e criatividade se encontram.
+                        Aprendemos a estruturar páginas web com <span
+                            class="text-red-400 font-mono text-xs">HTML5</span> semântico,
+                        a estilizá-las com <span class="text-blue-400 font-mono text-xs">CSS3</span> moderno (incluindo
+                        Flexbox, Grid e animações),
+                        e a adicionar interatividade com <span
+                            class="text-yellow-400 font-mono text-xs">JavaScript</span> puro.
+                    </p>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        O foco é construir uma base sólida de desenvolvimento web, entendendo como o navegador
+                        interpreta e renderiza código,
+                        boas práticas de acessibilidade, design responsivo e experiência do usuário.
+                    </p>
+
+                    <!-- Ementa resumida -->
+                    <div class="mt-6 p-4 rounded-xl bg-gray-900 border border-gray-700">
+                        <p class="text-xs font-semibold text-green-500 mb-3 uppercase tracking-wider">Ementa resumida
+                        </p>
+                        <div class="grid grid-cols-2 gap-2 text-xs text-gray-400">
+                            <div class="flex items-center gap-2"><span class="text-green-500">✓</span> Estrutura do
+                                documento HTML</div>
+                            <div class="flex items-center gap-2"><span class="text-green-500">✓</span> Seletores e
+                                especificidade CSS</div>
+                            <div class="flex items-center gap-2"><span class="text-green-500">✓</span> Box Model e
+                                layout</div>
+                            <div class="flex items-center gap-2"><span class="text-green-500">✓</span> Flexbox e CSS
+                                Grid</div>
+                            <div class="flex items-center gap-2"><span class="text-green-500">✓</span> Responsividade e
+                                Media Queries</div>
+                            <div class="flex items-center gap-2"><span class="text-green-500">✓</span> DOM e eventos JS
+                            </div>
+                            <div class="flex items-center gap-2"><span class="text-green-500">✓</span> Formulários e
+                                validação</div>
+                            <div class="flex items-center gap-2"><span class="text-yellow-400">◎</span> Introdução a
+                                frameworks</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card de informações -->
+                <div class="flex flex-col gap-3">
+                    <div class="p-4 rounded-xl bg-gray-900 border border-gray-700">
+                        <p class="text-[11px] text-gray-600 font-medium uppercase tracking-wider mb-3">Detalhes</p>
+                        <div class="flex flex-col gap-2.5 text-xs">
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-500">Curso</span>
+                                <span class="text-white font-medium">TSI · IFMT</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-500">Semestre</span>
+                                <span class="text-white font-medium">1° · 2026</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-500">Carga horária</span>
+                                <span class="text-green-500 font-semibold">72h</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-500">Modalidade</span>
+                                <span class="text-white font-medium">Presencial</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-500">Avaliação</span>
+                                <span class="text-white font-medium">Projetos práticos</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="https://github.com/rafapastrello" target="_blank" rel="noopener noreferrer"
+                        class="flex items-center gap-3 p-4 rounded-xl bg-gray-900 border border-gray-700 hover:border-green-500 transition-colors group">
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                            class="w-5 h-5 text-gray-400 group-hover:text-green-500 transition-colors"
+                            viewBox="0 0 24 24" fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                                clip-rule="evenodd" />
+                        </svg>
+                        <div>
+                            <p class="text-xs font-semibold text-white">Ver repositórios</p>
+                            <p class="text-[11px] text-gray-500">github.com/rafapastrello</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ATIVIDADES / LINHA DO TEMPO -->
+    <section id="atividades" class="reveal max-w-5xl mx-auto px-6 py-20">
+        <div class="flex items-center gap-3 mb-10">
+            <span class="block w-10 h-1 bg-green-500 rounded-full"></span>
+            <h2 class="text-2xl font-bold text-white">Atividades & Projetos</h2>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8 items-start">
+
+            <!-- Linha do tempo -->
+            <div>
+                <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-6">Cronograma de entregas</p>
+                <div class="relative pl-10">
+                    <div class="timeline-line"></div>
+
+                    <!-- Item 1 -->
+                    <a href="/Disciplina_1sem/Fun_Front_End/ATV_01_poema-rafaela-pastrello-silva.html" target="_blank">
+                        <div class="reveal relative mb-6">
+                            <div
+                                class="absolute -left-10 w-10 h-10 rounded-full bg-green-500/20 border-2 border-green-500 flex items-center justify-center">
+                                <span class="text-green-500 font-bold text-xs">01</span>
+                            </div>
+                            <div
+                                class="p-4 rounded-xl bg-gray-800 border border-gray-700 hover:border-green-500/50 transition-colors">
+                                <div class="flex items-start justify-between mb-2">
+                                    <h4 class="font-semibold text-sm text-white">Estrutura HTML Semântica (Poema)</h4>
+                                    <span
+                                        class="text-[10px] px-2 py-0.5 rounded-full bg-green-500/10 text-green-500 border border-green-500/20 flex-shrink-0 ml-2">✓
+                                        Entregue</span>
+                                </div>
+                                <p class="text-xs text-gray-500 mb-3">Formatação de um poema usando apenas HTML5,
+                                    com tags básicas e semânticas corretas.</p>
+                                <div class="flex items-center gap-2 flex-wrap">
+                                    <span class="tag-html text-[10px] px-2 py-0.5 rounded-full border">HTML5</span>
+                                    <a href="https://github.com/rafapastrello" target="_blank"
+                                        class="text-[10px] text-green-500 hover:text-green-400 font-medium flex items-center gap-1">
+                                        <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
+                                            <path fill-rule="evenodd"
+                                                d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                                                clip-rule="evenodd" />
+                                        </svg>
+                                        Ver no GitHub →
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Item 2 -->
+                    <a href="/Disciplina_1sem/Fun_Front_End/ATV_02_TCC_Rafaela_Pastrello.html" target="_blank">
+                        <div class="reveal relative mb-6">
+                            <div
+                                class="absolute -left-10 w-10 h-10 rounded-full bg-green-500/20 border-2 border-green-500 flex items-center justify-center">
+                                <span class="text-green-500 font-bold text-xs">02</span>
+                            </div>
+                            <div
+                                class="p-4 rounded-xl bg-gray-800 border border-gray-700 hover:border-green-500/50 transition-colors">
+                                <div class="flex items-start justify-between mb-2">
+                                    <h4 class="font-semibold text-sm text-white">Estrutura HTML Semântica (TCC)</h4>
+                                    <span
+                                        class="text-[10px] px-2 py-0.5 rounded-full bg-green-500/10 text-green-500 border border-green-500/20 flex-shrink-0 ml-2">✓
+                                        Entregue</span>
+                                </div>
+                                <p class="text-xs text-gray-500 mb-3">Formatação de um TCC simples e fictício usando
+                                    apenas HTML5,
+                                    com tags básicas e semânticas corretas.</p>
+                                <div class="flex items-center gap-2 flex-wrap">
+                                    <span class="tag-html text-[10px] px-2 py-0.5 rounded-full border">HTML5</span>
+                                    <a href="https://github.com/rafapastrello" target="_blank"
+                                        class="text-[10px] text-green-500 hover:text-green-400 font-medium flex items-center gap-1">
+                                        <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
+                                            <path fill-rule="evenodd"
+                                                d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                                                clip-rule="evenodd" />
+                                        </svg>
+                                        Ver no GitHub →
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Item 3 -->
+                    <a href="/Disciplina_1sem/Fun_Front_End/ATV_03_Quiz_Rafaela_Pastrello/" target="_blank">
+                        <div class="reveal relative mb-6">
+                            <div
+                                class="absolute -left-10 w-10 h-10 rounded-full bg-green-500/20 border-2 border-green-500 flex items-center justify-center">
+                                <span class="text-green-500 font-bold text-xs">03</span>
+                            </div>
+                            <div
+                                class="p-4 rounded-xl bg-gray-800 border border-gray-700 hover:border-green-500/50 transition-colors">
+                                <div class="flex items-start justify-between mb-2">
+                                    <h4 class="font-semibold text-sm text-white">Navegação entre arquivos e imagens com
+                                        HTML5</h4>
+                                    <span
+                                        class="text-[10px] px-2 py-0.5 rounded-full bg-green-500/10 text-green-500 border border-green-500/20 flex-shrink-0 ml-2">✓
+                                        Entregue</span>
+                                </div>
+                                <p class="text-xs text-gray-500 mb-3">Criação de um jogo (QUIZ) para treinar navegação
+                                    entre arquivos/imagens.</p>
+                                <div class="flex items-center gap-2 flex-wrap">
+                                    <span class="tag-html text-[10px] px-2 py-0.5 rounded-full border">HTML5</span>
+                                    <span class="tag-css text-[10px] px-2 py-0.5 rounded-full border">CSS</span>
+                                    <span class="tag-misc text-[10px] px-2 py-0.5 rounded-full border">Responsivo</span>
+                                    <a href="https://github.com/rafapastrello" target="_blank"
+                                        class="text-[10px] text-green-500 hover:text-green-400 font-medium flex items-center gap-1">
+                                        <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
+                                            <path fill-rule="evenodd"
+                                                d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                                                clip-rule="evenodd" />
+                                        </svg>
+                                        Ver no GitHub →
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Item 4 -->
+                    <a href="#" target="_blank">
+                        <div class="reveal relative mb-6">
+                            <div
+                                class="absolute -left-10 w-10 h-10 rounded-full bg-blue-500/20 border-2 border-blue-500 flex items-center justify-center">
+                                <span class="text-blue-400 font-bold text-xs">04</span>
+                            </div>
+                            <div
+                                class="p-4 rounded-xl bg-gray-800 border border-gray-700 hover:border-blue-500/50 transition-colors">
+                                <div class="flex items-start justify-between mb-2">
+                                    <h4 class="font-semibold text-sm text-white">Portfólio</h4>
+                                    <span
+                                        class="text-[10px] px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20 flex-shrink-0 ml-2">⟳
+                                        Em progresso</span>
+                                </div>
+                                <p class="text-xs text-gray-500 mb-3">Apesar de já ter este portfólio pronto e oficial, criei outro específico para a 4ª atividade, nele fiz exatamente o que o professor solicitou.</p>
+                                <div class="flex items-center gap-2 flex-wrap">
+                                    <span class="tag-css text-[10px] px-2 py-0.5 rounded-full border">Entrega específica</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Item 5 -->
+                    <a href="#" target="_blank"></a>
+                    <div class="reveal relative mb-6">
+                        <div
+                            class="absolute -left-10 w-10 h-10 rounded-full bg-gray-700 border-2 border-gray-600 flex items-center justify-center">
+                            <span class="text-gray-500 font-bold text-xs">05</span>
+                        </div>
+                        <div class="p-4 rounded-xl bg-gray-800/60 border border-gray-700/50">
+                            <div class="flex items-start justify-between mb-2">
+                                <h4 class="font-semibold text-sm text-gray-400">Próxima atividade</h4>
+                                <span
+                                    class="text-[10px] px-2 py-0.5 rounded-full bg-gray-700 text-gray-500 border border-gray-600 flex-shrink-0 ml-2">Em
+                                    breve</span>
+                            </div>
+                            <p class="text-xs text-gray-600 mb-3">Descrição.</p>
+                            <div class="flex items-center gap-2">
+                                <span
+                                    class="text-[10px] px-2 py-0.5 rounded-full bg-gray-700/50 text-gray-600 border border-gray-700">Badge</span>
+                                <span
+                                    class="text-[10px] px-2 py-0.5 rounded-full bg-gray-700/50 text-gray-600 border border-gray-700">Badge</span>
+                            </div>
+                        </div>
+                    </div>
+                    </a>
+
+                    <!-- Item 6 -->
+                    <a href="#" target="_blank">
+                        <div class="reveal relative">
+                            <div
+                                class="absolute -left-10 w-10 h-10 rounded-full bg-gray-700 border-2 border-gray-600 flex items-center justify-center">
+                                <span class="text-gray-500 font-bold text-xs">06</span>
+                            </div>
+                            <div class="p-4 rounded-xl bg-gray-800/60 border border-gray-700/50">
+                                <div class="flex items-start justify-between mb-2">
+                                    <h4 class="font-semibold text-sm text-gray-400">Próxima atividade</h4>
+                                    <span
+                                        class="text-[10px] px-2 py-0.5 rounded-full bg-gray-700 text-gray-500 border border-gray-600 flex-shrink-0 ml-2">Em
+                                        breve</span>
+                                </div>
+                                <p class="text-xs text-gray-600 mb-3">Descrição.</p>
+                                <div class="flex items-center gap-2 flex-wrap">
+                                    <span
+                                        class="text-[10px] px-2 py-0.5 rounded-full bg-gray-700/50 text-gray-600 border border-gray-700">Badge</span>
+                                    <span
+                                        class="text-[10px] px-2 py-0.5 rounded-full bg-gray-700/50 text-gray-600 border border-gray-700">Badge</span>
+                                    <span
+                                        class="text-[10px] px-2 py-0.5 rounded-full bg-gray-700/50 text-gray-600 border border-gray-700">Badge</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Projetos em destaque -->
+            <div>
+                <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-6">Projetos em destaque</p>
+
+                <!-- Projeto 1 -->
+                <div
+                    class="reveal mb-4 rounded-2xl bg-gray-800 border border-gray-700 overflow-hidden hover:border-green-500/50 transition-colors group">
+                    <div class="h-2 bg-gradient-to-r from-green-500 to-green-600"></div>
+                    <div class="p-5">
+                        <div class="flex items-start justify-between mb-3">
+                            <div class="flex items-center gap-2">
+                                <span class="text-xl">🌐</span>
+                                <h4 class="font-semibold text-sm text-white">Portfólio Pessoal</h4>
+                            </div>
+                            <span
+                                class="text-[10px] font-medium px-2 py-0.5 rounded-full bg-green-500/10 text-green-500 border border-green-500/20">Ativo</span>
+                        </div>
+                        <p class="text-xs text-gray-500 leading-relaxed mb-4">
+                            Este portfólio que você está visualizando agora! Desenvolvido com HTML5, CSS3 customizado e
+                            Tailwind CSS como exercício prático da disciplina.
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <div class="flex gap-2">
+                                <span class="tag-html text-[10px] px-2 py-0.5 rounded-full border">HTML</span>
+                                <span class="tag-css text-[10px] px-2 py-0.5 rounded-full border">CSS</span>
+                                <span class="tag-misc text-[10px] px-2 py-0.5 rounded-full border">Tailwind</span>
+                            </div>
+                            <a href="https://github.com/rafapastrello" target="_blank"
+                                class="text-[11px] text-green-500 hover:text-green-400 font-medium">GitHub →</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Projeto 2 -->
+                <a href="/Disciplina_1sem/Fun_Front_End/ATV_03_Quiz_Rafaela_Pastrello/" target="_blank">
+                    <div
+                        class="reveal mb-4 rounded-2xl bg-gray-800 border border-gray-700 overflow-hidden hover:border-blue-500/50 transition-colors group">
+                        <div class="h-2 bg-gradient-to-r from-blue-500 to-blue-600"></div>
+                        <div class="p-5">
+                            <div class="flex items-start justify-between mb-3">
+                                <div class="flex items-center gap-2">
+                                    <span class="text-xl">🎮</span>
+                                    <h4 class="font-semibold text-sm text-white">QUIZ Game</h4>
+                                </div>
+                                <span
+                                    class="text-[10px] font-medium px-2 py-0.5 rounded-full bg-green-500/10 text-green-500 border border-green-500/20">Entregue</span>
+                            </div>
+                            <p class="text-xs text-gray-500 leading-relaxed mb-4">
+                                Jogo (QUIZ) criado para treinar navegação entre arquivos e conhecer como funciona os caminhos do diretório.
+                            </p>
+                            <div class="flex items-center justify-between">
+                                <div class="flex gap-2">
+                                    <span class="tag-html text-[10px] px-2 py-0.5 rounded-full border">HTML5</span>
+                                    <span class="tag-css text-[10px] px-2 py-0.5 rounded-full border">CSS</span>
+                                    <span class="tag-css text-[10px] px-2 py-0.5 rounded-full border">Flexbox</span>
+                                    <span class="tag-misc text-[10px] px-2 py-0.5 rounded-full border">Responsivo</span>
+                                </div>
+                                <a href="https://github.com/rafapastrello" target="_blank"
+                                    class="text-[11px] text-green-500 hover:text-green-400 font-medium">GitHub →</a>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Projeto 3 — em progresso -->
+                <div class="reveal rounded-2xl bg-gray-800/60 border border-gray-700/50 overflow-hidden">
+                    <div class="h-2 bg-gradient-to-r from-yellow-500/50 to-yellow-600/50"></div>
+                    <div class="p-5">
+                        <div class="flex items-start justify-between mb-3">
+                            <div class="flex items-center gap-2">
+                                <span class="text-xl">📊</span>
+                                <h4 class="font-semibold text-sm text-gray-400">Próximo projeto</h4>
+                            </div>
+                            <span
+                                class="text-[10px] font-medium px-2 py-0.5 rounded-full bg-yellow-500/10 text-yellow-400 border border-yellow-500/20">Em
+                                progresso</span>
+                        </div>
+                        <p class="text-xs text-gray-600 leading-relaxed mb-4">
+                            Descrição
+                        </p>
+                        <div class="flex gap-2">
+                            <span
+                                class="text-[10px] px-2 py-0.5 rounded-full bg-gray-700/50 text-gray-600 border border-gray-700">Badge</span>
+                            <span
+                                class="text-[10px] px-2 py-0.5 rounded-full bg-gray-700/50 text-gray-600 border border-gray-700">Badge</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HABILIDADES -->
+    <section id="habilidades" class="reveal border-t border-gray-800 bg-gray-800/30">
+        <div class="max-w-5xl mx-auto px-6 py-20">
+            <div class="flex items-center gap-3 mb-10">
+                <span class="block w-10 h-1 bg-green-500 rounded-full"></span>
+                <h2 class="text-2xl font-bold text-white">Habilidades desenvolvidas</h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- HTML -->
+                <div class="skill-card reveal">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div
+                            class="w-9 h-9 rounded-xl bg-red-500/10 border border-red-500/20 flex items-center justify-center text-lg">
+                            🧱</div>
+                        <div>
+                            <p class="text-sm font-semibold text-white">HTML5</p>
+                            <p class="text-xs text-gray-500">Semântica e estrutura</p>
+                        </div>
+                        <span class="ml-auto text-sm font-bold text-red-400">98%</span>
+                    </div>
+                    <div class="h-1.5 bg-gray-700 rounded-full overflow-hidden">
+                        <div class="progress-bar"
+                            style="width: 80%; background: linear-gradient(90deg,#ef4444,#dc2626);"></div>
+                    </div>
+                    <p class="text-xs text-gray-600 mt-2">Tags semânticas, formulários, acessibilidade básica</p>
+                </div>
+
+                <!-- CSS -->
+                <div class="skill-card reveal">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div
+                            class="w-9 h-9 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-lg">
+                            🎨</div>
+                        <div>
+                            <p class="text-sm font-semibold text-white">CSS3</p>
+                            <p class="text-xs text-gray-500">Estilização e layout</p>
+                        </div>
+                        <span class="ml-auto text-sm font-bold text-blue-400">80%</span>
+                    </div>
+                    <div class="h-1.5 bg-gray-700 rounded-full overflow-hidden">
+                        <div class="progress-bar"
+                            style="width: 70%; background: linear-gradient(90deg,#3b82f6,#2563eb);"></div>
+                    </div>
+                    <p class="text-xs text-gray-600 mt-2">Seletores, Box Model, Flexbox, variáveis CSS</p>
+                </div>
+
+                <!-- Flexbox / Grid -->
+                <div class="skill-card reveal">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div
+                            class="w-9 h-9 rounded-xl bg-green-500/10 border border-green-500/20 flex items-center justify-center text-lg">
+                            ⊞</div>
+                        <div>
+                            <p class="text-sm font-semibold text-white">Flexbox & Grid</p>
+                            <p class="text-xs text-gray-500">Layouts modernos</p>
+                        </div>
+                        <span class="ml-auto text-sm font-bold text-green-400">75%</span>
+                    </div>
+                    <div class="h-1.5 bg-gray-700 rounded-full overflow-hidden">
+                        <div class="progress-bar" style="width: 65%;"></div>
+                    </div>
+                    <p class="text-xs text-gray-600 mt-2">Flexbox dominado; CSS Grid em aprendizado</p>
+                </div>
+
+                <!-- Responsividade -->
+                <div class="skill-card reveal">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div
+                            class="w-9 h-9 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-lg">
+                            📱</div>
+                        <div>
+                            <p class="text-sm font-semibold text-white">Design Responsivo</p>
+                            <p class="text-xs text-gray-500">Mobile-first</p>
+                        </div>
+                        <span class="ml-auto text-sm font-bold text-purple-400">82%</span>
+                    </div>
+                    <div class="h-1.5 bg-gray-700 rounded-full overflow-hidden">
+                        <div class="progress-bar"
+                            style="width: 60%; background: linear-gradient(90deg,#a855f7,#9333ea);"></div>
+                    </div>
+                    <p class="text-xs text-gray-600 mt-2">Media queries, breakpoints, viewport units</p>
+                </div>
+
+                <!-- JavaScript -->
+                <div class="skill-card reveal">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div
+                            class="w-9 h-9 rounded-xl bg-yellow-500/10 border border-yellow-500/20 flex items-center justify-center text-lg">
+                            ⚡</div>
+                        <div>
+                            <p class="text-sm font-semibold text-white">JavaScript</p>
+                            <p class="text-xs text-gray-500">Interatividade</p>
+                        </div>
+                        <span class="ml-auto text-sm font-bold text-yellow-400">100%</span>
+                    </div>
+                    <div class="h-1.5 bg-gray-700 rounded-full overflow-hidden">
+                        <div class="progress-bar"
+                            style="width: 40%; background: linear-gradient(90deg,#eab308,#ca8a04);"></div>
+                    </div>
+                    <p class="text-xs text-gray-600 mt-2">Variáveis, funções, DOM básico — em evolução</p>
+                </div>
+
+                <!-- Git -->
+                <div class="skill-card reveal">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div
+                            class="w-9 h-9 rounded-xl bg-orange-500/10 border border-orange-500/20 flex items-center justify-center text-lg">
+                            🌿</div>
+                        <div>
+                            <p class="text-sm font-semibold text-white">Git & GitHub</p>
+                            <p class="text-xs text-gray-500">Controle de versão</p>
+                        </div>
+                        <span class="ml-auto text-sm font-bold text-orange-400">92%</span>
+                    </div>
+                    <div class="h-1.5 bg-gray-700 rounded-full overflow-hidden">
+                        <div class="progress-bar"
+                            style="width: 55%; background: linear-gradient(90deg,#f97316,#ea580c);"></div>
+                    </div>
+                    <p class="text-xs text-gray-600 mt-2">Commits, push, pull requests básicos</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NAV ENTRE DISCIPLINAS -->
+    <section class="reveal border-t border-gray-800 bg-gray-800/20">
+        <div class="max-w-5xl mx-auto px-6 py-12">
+            <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider text-center mb-6">Outras disciplinas
+            </p>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                <a href="#fund-prog"
+                    class="flex flex-col items-center gap-2 p-4 rounded-xl bg-gray-800 border border-gray-700 hover:border-orange-500/50 hover:-translate-y-1 transition-all duration-200 no-underline text-center">
+                    <span class="text-2xl">💻</span>
+                    <p class="text-xs font-semibold text-white leading-tight">Fund. de Programação</p>
+                </a>
+                <a href="#fund-eng"
+                    class="flex flex-col items-center gap-2 p-4 rounded-xl bg-gray-800 border border-gray-700 hover:border-blue-500/50 hover:-translate-y-1 transition-all duration-200 no-underline text-center">
+                    <span class="text-2xl">⚙️</span>
+                    <p class="text-xs font-semibold text-white leading-tight">Fund. Eng. Software</p>
+                </a>
+                <a href="#fund-comp"
+                    class="flex flex-col items-center gap-2 p-4 rounded-xl bg-gray-800 border border-gray-700 hover:border-yellow-500/50 hover:-translate-y-1 transition-all duration-200 no-underline text-center">
+                    <span class="text-2xl">🖥️</span>
+                    <p class="text-xs font-semibold text-white leading-tight">Fund. da Computação</p>
+                </a>
+                <a href="#mat-comp"
+                    class="flex flex-col items-center gap-2 p-4 rounded-xl bg-gray-800 border border-gray-700 hover:border-purple-500/50 hover:-translate-y-1 transition-all duration-200 no-underline text-center">
+                    <span class="text-xl font-bold text-purple-400">∑</span>
+                    <p class="text-xs font-semibold text-white leading-tight">Matemática Computacional</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- RODAPÉ -->
+    <footer class="border-t border-gray-800 bg-gray-900">
+        <div class="max-w-5xl mx-auto px-6 py-6 flex flex-col md:flex-row items-center justify-between gap-3">
+            <p class="text-xs text-gray-600">© 2026 Rafaela Pastrello Silva — IFMT · TSI · Fundamentos de Front End</p>
+            <div class="flex items-center gap-4">
+                <a href="index.html#disciplinas"
+                    class="text-xs text-gray-600 hover:text-green-500 transition-colors font-medium">← Todas as
+                    disciplinas</a>
+                <a href="#" class="text-xs text-gray-600 hover:text-green-500 transition-colors font-medium">↑ Topo</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll reveal
+        const reveals = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.07 });
+        reveals.forEach(el => observer.observe(el));
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(link => {
+            link.addEventListener('click', e => {
+                const target = document.querySelector(link.getAttribute('href'));
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Active nav highlight
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-pill');
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                if (window.scrollY >= section.offsetTop - 120) current = section.getAttribute('id');
+            });
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) link.classList.add('active');
+            });
+        });
+
+        // Animate progress bars when visible
+        const progressBars = document.querySelectorAll('.progress-bar');
+        const barObserver = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.width = entry.target.style.width;
+                }
+            });
+        }, { threshold: 0.5 });
+        progressBars.forEach(bar => {
+            const targetWidth = bar.style.width;
+            bar.style.width = '0';
+            barObserver.observe(bar);
+            setTimeout(() => {
+                const barEntry = new IntersectionObserver(([e]) => {
+                    if (e.isIntersecting) { bar.style.width = targetWidth; barEntry.disconnect(); }
+                }, { threshold: 0.3 });
+                barEntry.observe(bar);
+            }, 100);
+        });
+    </script>
+
+</body>
+
+</html>

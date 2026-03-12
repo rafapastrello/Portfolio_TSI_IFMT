@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rafaela Pastrello Silva — Portfólio Acadêmico</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        poppins: ['Poppins', 'sans-serif']
+                    },
+                    keyframes: {
+                        aparecerCima: {
+                            '0%': { opacity: '0', transform: 'translateY(24px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        piscar: {
+                            '0%,100%': { opacity: '1' },
+                            '50%': { opacity: '0.4' }
+                        },
+                        blob: {
+                            '0%,100%': { borderRadius: '60% 40% 55% 45% / 50% 60% 40% 50%' },
+                            '50%': { borderRadius: '40% 60% 45% 55% / 60% 40% 60% 40%' }
+                        },
+                    },
+                    animation: {
+                        aparecerCima: 'aparecerCima 0.6s ease forwards',
+                        piscar: 'piscar 2s ease-in-out infinite',
+                        blob: 'blob 7s ease-in-out infinite',
+                    },
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-gray-900 text-gray-100 antialiased font-poppins">
+
+    <!-- NAVEGAÇÃO -->
+    <nav class="sticky top-0 z-50 bg-gray-900/80 backdrop-blur-md border-b border-gray-800">
+        <div class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
+            <span class="text-base font-extrabold text-white">
+                portfólio<span class="text-green-500">.</span>
+            </span>
+            <div class="hidden md:flex items-center gap-8">
+                <a href="#sobre"
+                    class="text-sm font-medium text-gray-400 hover:text-green-500 transition-colors duration-200 relative after:absolute after:left-0 after:-bottom-0.5 after:h-0.5 after:w-0 after:bg-green-500 after:rounded-full after:transition-all after:duration-300 hover:after:w-full">Sobre</a>
+                <a href="#disciplinas"
+                    class="text-sm font-medium text-gray-400 hover:text-green-500 transition-colors duration-200 relative after:absolute after:left-0 after:-bottom-0.5 after:h-0.5 after:w-0 after:bg-green-500 after:rounded-full after:transition-all after:duration-300 hover:after:w-full">Disciplinas</a>
+                <a href="#contato"
+                    class="text-sm font-medium text-gray-400 hover:text-green-500 transition-colors duration-200 relative after:absolute after:left-0 after:-bottom-0.5 after:h-0.5 after:w-0 after:bg-green-500 after:rounded-full after:transition-all after:duration-300 hover:after:w-full">Contato</a>
+            </div>
+            <a href="#contato"
+                class="text-sm font-semibold px-5 py-2 rounded-full bg-green-500 hover:bg-green-500 text-gray-900 transition-colors duration-200">
+                Fale comigo
+            </a>
+        </div>
+    </nav>
+
+    <!-- FAIXA INSTITUCIONAL IFMT -->
+    <div
+        class="bg-gradient-to-r from-green-900/30 to-green-900/10 border-l-4 border-green-500 border-b border-gray-800">
+        <div class="max-w-5xl mx-auto px-6 py-3 flex flex-wrap items-center justify-between gap-3">
+            <div class="flex items-center gap-3">
+                <img src="/src/img/logos/logo_IF.png" alt="Logotipo Instituto Federal" class="w-8 h-8">
+                <div>
+                    <p class="text-xs font-bold text-green-500 leading-tight">Instituto Federal de Mato Grosso</p>
+                    <p class="text-[11px] text-gray-400 leading-tight">Tecnologia em Sistemas para Internet &bull;
+                        Ingresso 2026</p>
+                </div>
+            </div>
+            <!-- E-mail exibido como texto estático (não clicável para envio) -->
+            <span
+                class="inline-flex items-center gap-2 text-[11px] font-medium px-3 py-1.5 rounded-full bg-gray-800 border border-gray-700 text-gray-400">
+                ✉️ <a href="mailto:pastrello.rafaela@estudante.ifmt.edu.br">pastrello.rafaela@estudante.ifmt.edu.br</a>
+            </span>
+        </div>
+    </div>
+
+    <!-- HERO -->
+    <section class="relative max-w-5xl mx-auto px-6 pt-20 pb-24 overflow-hidden">
+        <div
+            class="absolute -top-32 -right-32 w-[480px] h-[480px] rounded-full bg-green-500/10 blur-3xl animate-blob pointer-events-none">
+        </div>
+        <div class="absolute top-10 -left-24 w-64 h-64 rounded-full bg-green-500/5 blur-2xl pointer-events-none"></div>
+
+        <div class="relative z-10 flex flex-col md:flex-row items-center gap-12">
+
+            <!-- Texto de apresentação -->
+            <div class="flex-1 animate-aparecerCima">
+                <span
+                    class="inline-flex items-center gap-2 text-xs font-semibold px-3 py-1 rounded-full bg-green-500/10 text-green-500 border border-green-500/20 mb-5">
+                    <span class="w-2 h-2 rounded-full bg-green-500 animate-piscar"></span>
+                    Disponível para conexões
+                </span>
+
+                <h1 class="text-4xl md:text-5xl font-extrabold leading-tight text-white mt-3 mb-4">
+                    Eu sou<br />
+                    <span class="text-green-500">Rafaela Pastrello</span>
+                </h1>
+
+                <p class="text-gray-400 text-sm leading-relaxed mb-6 max-w-md">
+                    Estudante de Tecnologia em Sistemas para Internet no
+                    <span class="text-green-500 font-semibold">IFMT</span>.
+                    Apaixonada por tecnologia — aqui você encontra minhas atividades e projetos de cada disciplina do
+                    semestre.
+                </p>
+
+                <!-- Badges do GitHub (estáticos como imagens) -->
+                <div class="flex flex-wrap gap-2 mb-6">
+                    <img src="https://img.shields.io/github/followers/rafapastrello?label=Seguidores&style=for-the-badge&logo=github&color=22c55e&labelColor=1f2937"
+                        alt="Seguidores no GitHub" />
+                    <img src="https://img.shields.io/badge/GitHub-rafapastrello-22c55e?style=for-the-badge&logo=github&logoColor=white&labelColor=1f2937"
+                        alt="Perfil GitHub rafapastrello" />
+                </div>
+
+                <!-- Botões de navegação -->
+                <div class="flex flex-wrap gap-3">
+                    <a href="#disciplinas"
+                        class="inline-flex items-center gap-2 text-sm font-semibold px-6 py-3 rounded-full bg-green-500 hover:bg-green-500 text-gray-900 transition-colors duration-200">
+                        Ver Disciplinas <span>→</span>
+                    </a>
+                    <a href="#sobre"
+                        class="inline-flex items-center text-sm font-semibold px-6 py-3 rounded-full border border-gray-700 hover:border-green-500 text-gray-300 hover:text-green-500 transition-colors duration-200">
+                        Saiba mais
+                    </a>
+                </div>
+            </div>
+
+            <!-- Foto de perfil — avatar estático (sem upload) -->
+            <div class="flex flex-col items-center gap-5 animate-aparecerCima [animation-delay:.15s]">
+
+                <!-- Foto de perfil -->
+                <img src="/src/img/perfil_pastrello.jpg" alt="Foto de Rafaela Pastrello"
+                    class="w-36 h-36 rounded-full object-cover border-2 border-green-500 ring-4 ring-green-500/20" />
+
+                <!-- Cartões de estatísticas -->
+                <div class="flex gap-3">
+                    <div class="text-center px-5 py-4 rounded-2xl bg-gray-800 border border-gray-700">
+                        <p class="text-xl font-extrabold text-green-500">5</p>
+                        <p class="text-xs text-gray-500 mt-1 font-medium">Disciplinas</p>
+                    </div>
+                    <div class="text-center px-5 py-4 rounded-2xl bg-gray-800 border border-gray-700">
+                        <p class="text-xl font-extrabold text-white">1°</p>
+                        <p class="text-xs text-gray-500 mt-1 font-medium">Semestre</p>
+                    </div>
+                    <div class="text-center px-5 py-4 rounded-2xl bg-gray-800 border border-gray-700">
+                        <p class="text-xl font-extrabold text-green-500">✓</p>
+                        <p class="text-xs text-gray-500 mt-1 font-medium">Em dia</p>
+                    </div>
+                </div>
+
+                <!-- Link do GitHub -->
+                <a href="https://github.com/rafapastrello" target="_blank" rel="noopener noreferrer"
+                    class="flex items-center gap-3 px-4 py-3 rounded-xl bg-gray-800 border border-gray-700 hover:border-green-500 transition-colors duration-200 w-full justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-400" viewBox="0 0 24 24"
+                        fill="currentColor">
+                        <path fill-rule="evenodd"
+                            d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                            clip-rule="evenodd" />
+                    </svg>
+                    <span class="text-xs font-semibold text-gray-300">github.com/<span
+                            class="text-green-500">rafapastrello</span></span>
+                </a>
+            </div>
+        </div>
+
+        <div class="mt-20">
+            <!-- Gráfico -->
+            <a href="https://github.com/ashutosh00710/github-readme-activity-graph">
+                <img
+                    src="https://github-readme-activity-graph.vercel.app/graph?username=rafapastrello&bg_color=111827&color=00FF00&line=b13583&point=FFC83D&area=true&hide_border=true" />
+            </a>
+        </div>
+    </section>
+
+    <!-- SOBRE MIM -->
+    <section id="sobre"
+        class="opacity-0 translate-y-7 transition-all duration-700 border-t border-gray-800 bg-gray-800/30">
+        <div class="max-w-5xl mx-auto px-6 py-20 grid md:grid-cols-2 gap-14 items-center">
+            <div>
+                <span class="block w-10 h-1 bg-green-500 rounded-full mb-4"></span>
+                <h2 class="text-3xl font-bold text-white mb-4">Sobre mim</h2>
+                <p class="text-gray-400 text-sm leading-relaxed mb-3">
+                    Cursando <span class="text-white font-medium">Tecnologia em Sistemas para Internet</span> no
+                    Instituto Federal de Mato Grosso (IFMT) desde fev/2026, com foco em construir uma base sólida em
+                    programação, desenvolvimento web e boas práticas de software.
+                </p>
+                <p class="text-gray-400 text-sm leading-relaxed">
+                    Este portfólio é meu espaço para organizar e compartilhar tudo que aprendo — atividades, projetos e
+                    reflexões do meu caminho acadêmico.
+                </p>
+                <div class="mt-6">
+                    <img src="https://github-readme-stats.vercel.app/api?username=rafapastrello&show_icons=true&theme=tokyonight&bg_color=1f2937&border_color=374151&title_color=10B981&text_color=9ca3af&icon_color=10B981&hide_border=false&count_private=true"
+                        alt="Estatísticas do GitHub de Rafaela" class="rounded-xl border border-gray-700 max-w-full"
+                        onerror="this.style.display='none'" />
+                </div>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+                <div
+                    class="opacity-0 translate-y-7 transition-all duration-700 delay-75 rounded-2xl bg-green-500/10 border border-green-500/20 p-5">
+                    <div class="text-3xl mb-3">📚</div>
+                    <p class="font-semibold text-sm text-white">5 Disciplinas</p>
+                    <p class="text-xs text-gray-500 mt-1">Semestre ativo</p>
+                </div>
+                <div
+                    class="opacity-0 translate-y-7 transition-all duration-700 delay-150 rounded-2xl bg-gray-800 border border-gray-700 p-5">
+                    <div class="text-3xl mb-3">🌐</div>
+                    <p class="font-semibold text-sm text-white">TSI – IFMT</p>
+                    <p class="text-xs text-gray-500 mt-1">Curso atual</p>
+                </div>
+                <div
+                    class="opacity-0 translate-y-7 transition-all duration-700 delay-200 rounded-2xl bg-gray-800 border border-gray-700 p-5">
+                    <div class="text-3xl mb-3">🎯</div>
+                    <p class="font-semibold text-sm text-white">Foco total</p>
+                    <p class="text-xs text-gray-500 mt-1">Sempre aprendendo</p>
+                </div>
+                <div
+                    class="opacity-0 translate-y-7 transition-all duration-700 delay-300 rounded-2xl bg-gray-800 border border-gray-700 p-5">
+                    <div class="text-3xl mb-3">💡</div>
+                    <p class="font-semibold text-sm text-white">Projetos práticos</p>
+                    <p class="text-xs text-gray-500 mt-1">Mão na massa</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DISCIPLINAS -->
+    <section id="disciplinas" class="opacity-0 translate-y-7 transition-all duration-700 max-w-5xl mx-auto px-6 py-20">
+        <div class="text-center mb-12">
+            <span class="block w-10 h-1 bg-green-500 rounded-full mx-auto mb-4"></span>
+            <h2 class="text-3xl font-bold text-white mb-3">Disciplinas</h2>
+            <p class="text-gray-500 text-sm mx-auto">Clique em uma disciplina para ver as atividades e
+                materiais.</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+
+            <a href="/Disciplina_1sem/Fun_Front_End/"
+                class="opacity-0 translate-y-7 transition-all duration-700 delay-75 block no-underline rounded-2xl bg-gray-800 border border-gray-700 p-6 hover:-translate-y-1.5 hover:shadow-[0_0_32px_rgba(16,185,129,0.12)] hover:border-green-500 group">
+                <div class="flex items-start justify-between mb-5">
+                    <div
+                        class="w-12 h-12 rounded-xl bg-orange-500/10 border border-orange-500/20 flex items-center justify-center text-2xl">
+                        💻</div>
+                    <svg class="w-5 h-5 mt-1 text-gray-600 group-hover:translate-x-1 group-hover:text-green-500 transition-all duration-200"
+                        fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+                </div>
+                <h3 class="font-semibold text-white text-[15px] mb-2 leading-snug">Fundamentos de Programação</h3>
+                <p class="text-xs text-gray-500 leading-relaxed mb-4">Lógica, algoritmos e pensamento computacional.</p>
+                <div class="flex gap-2">
+                    <span
+                        class="text-[11px] font-medium px-3 py-1 rounded-full bg-orange-500/10 text-orange-400 border border-orange-500/20">Python</span>
+                    <span
+                        class="text-[11px] font-medium px-3 py-1 rounded-full bg-orange-500/10 text-orange-400 border border-orange-500/20">Lógica</span>
+                </div>
+            </a>
+
+            <a href="#fund-eng"
+                class="opacity-0 translate-y-7 transition-all duration-700 delay-150 block no-underline rounded-2xl bg-gray-800 border border-gray-700 p-6 hover:-translate-y-1.5 hover:shadow-[0_0_32px_rgba(16,185,129,0.12)] hover:border-green-500 group">
+                <div class="flex items-start justify-between mb-5">
+                    <div
+                        class="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-2xl">
+                        ⚙️</div>
+                    <svg class="w-5 h-5 mt-1 text-gray-600 group-hover:translate-x-1 group-hover:text-green-500 transition-all duration-200"
+                        fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+                </div>
+                <h3 class="font-semibold text-white text-[15px] mb-2 leading-snug">Fundamentos da Engenharia de Software
+                </h3>
+                <p class="text-xs text-gray-500 leading-relaxed mb-4">Processos, metodologias e boas práticas.</p>
+                <div class="flex gap-2">
+                    <span
+                        class="text-[11px] font-medium px-3 py-1 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20">Scrum</span>
+                    <span
+                        class="text-[11px] font-medium px-3 py-1 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20">UML</span>
+                </div>
+            </a>
+
+            <a href="#fund-front"
+                class="opacity-0 translate-y-7 transition-all duration-700 delay-200 block no-underline rounded-2xl bg-gray-800 border border-gray-700 p-6 hover:-translate-y-1.5 hover:shadow-[0_0_32px_rgba(16,185,129,0.12)] hover:border-green-500 group">
+                <div class="flex items-start justify-between mb-5">
+                    <div
+                        class="w-12 h-12 rounded-xl bg-green-500/10 border border-green-500/20 flex items-center justify-center text-2xl">
+                        🎨</div>
+                    <svg class="w-5 h-5 mt-1 text-gray-600 group-hover:translate-x-1 group-hover:text-green-500 transition-all duration-200"
+                        fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+                </div>
+                <h3 class="font-semibold text-white text-[15px] mb-2 leading-snug">Fundamentos de Front End</h3>
+                <p class="text-xs text-gray-500 leading-relaxed mb-4">HTML, CSS, JavaScript e interfaces modernas.</p>
+                <div class="flex gap-2">
+                    <span
+                        class="text-[11px] font-medium px-3 py-1 rounded-full bg-green-500/10 text-green-500 border border-green-500/20">HTML/CSS</span>
+                    <span
+                        class="text-[11px] font-medium px-3 py-1 rounded-full bg-green-500/10 text-green-500 border border-green-500/20">JS</span>
+                </div>
+            </a>
+
+            <a href="#fund-comp"
+                class="opacity-0 translate-y-7 transition-all duration-700 delay-300 block no-underline rounded-2xl bg-gray-800 border border-gray-700 p-6 hover:-translate-y-1.5 hover:shadow-[0_0_32px_rgba(16,185,129,0.12)] hover:border-green-500 group">
+                <div class="flex items-start justify-between mb-5">
+                    <div
+                        class="w-12 h-12 rounded-xl bg-yellow-500/10 border border-yellow-500/20 flex items-center justify-center text-2xl">
+                        🖥️</div>
+                    <svg class="w-5 h-5 mt-1 text-gray-600 group-hover:translate-x-1 group-hover:text-green-500 transition-all duration-200"
+                        fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+                </div>
+                <h3 class="font-semibold text-white text-[15px] mb-2 leading-snug">Fundamentos da Computação</h3>
+                <p class="text-xs text-gray-500 leading-relaxed mb-4">Arquitetura, sistemas operacionais e redes.</p>
+                <div class="flex gap-2">
+                    <span
+                        class="text-[11px] font-medium px-3 py-1 rounded-full bg-yellow-500/10 text-yellow-400 border border-yellow-500/20">SO</span>
+                    <span
+                        class="text-[11px] font-medium px-3 py-1 rounded-full bg-yellow-500/10 text-yellow-400 border border-yellow-500/20">Redes</span>
+                </div>
+            </a>
+
+            <a href="#mat-comp"
+                class="opacity-0 translate-y-7 transition-all duration-700 delay-[350ms] block no-underline rounded-2xl bg-gray-800 border border-gray-700 p-6 hover:-translate-y-1.5 hover:shadow-[0_0_32px_rgba(16,185,129,0.12)] hover:border-green-500 group">
+                <div class="flex items-start justify-between mb-5">
+                    <div
+                        class="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-xl font-bold text-purple-400">
+                        ∑</div>
+                    <svg class="w-5 h-5 mt-1 text-gray-600 group-hover:translate-x-1 group-hover:text-green-500 transition-all duration-200"
+                        fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+                </div>
+                <h3 class="font-semibold text-white text-[15px] mb-2 leading-snug">Matemática Computacional</h3>
+                <p class="text-xs text-gray-500 leading-relaxed mb-4">Álgebra linear, cálculo e matemática discreta.</p>
+                <div class="flex gap-2">
+                    <span
+                        class="text-[11px] font-medium px-3 py-1 rounded-full bg-purple-500/10 text-purple-400 border border-purple-500/20">Álgebra</span>
+                    <span
+                        class="text-[11px] font-medium px-3 py-1 rounded-full bg-purple-500/10 text-purple-400 border border-purple-500/20">Cálculo</span>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- GIF Mario -->
+    <section class="max-w-5xl mx-auto px-6">
+        <img src="/src/gif/mario.gif" alt="GIF Mario Programando">
+    </section>
+
+    <!-- CONTATO -->
+    <section id="contato"
+        class="opacity-0 translate-y-7 transition-all duration-700 border-t border-gray-800 bg-gray-800/30">
+        <div class="max-w-5xl mx-auto px-6 py-20 grid md:grid-cols-2 gap-14 items-center">
+            <div>
+                <span class="block w-10 h-1 bg-green-500 rounded-full mb-4"></span>
+                <h2 class="text-3xl font-bold text-white mb-3">Fale comigo</h2>
+                <p class="text-gray-400 text-sm leading-relaxed max-w-xs">
+                    Estou sempre aberta a trocas de conhecimento e novas conexões. Entre em contato!
+                </p>
+            </div>
+            <div class="flex flex-col gap-3">
+                <!-- E-mail -->
+                <a href="mailto:pastrello.rafaela@estudante.ifmt.edu.br" target="_blank" rel="noopener noreferrer"
+                    class="flex items-center gap-4 px-5 py-4 rounded-xl bg-gray-800 border border-gray-700 no-underline hover:border-green-500 hover:translate-x-1.5 hover:bg-green-500/5 transition-all duration-200">
+                    <span class="text-2xl">✉️</span>
+                    <div>
+                        <p class="font-semibold text-sm text-white">E-mail</p>
+                        <p class="text-xs text-gray-500">pastrello.rafaela@estudante.ifmt.edu.br</p>
+                    </div>
+                </a>
+
+                <!-- GitHub -->
+                <a href="https://github.com/rafapastrello" target="_blank" rel="noopener noreferrer"
+                    class="flex items-center gap-4 px-5 py-4 rounded-xl bg-gray-800 border border-gray-700 no-underline hover:border-green-500 hover:translate-x-1.5 hover:bg-green-500/5 transition-all duration-200">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white" viewBox="0 0 24 24"
+                        fill="currentColor">
+                        <path fill-rule="evenodd"
+                            d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                            clip-rule="evenodd" />
+                    </svg>
+                    <div>
+                        <p class="font-semibold text-sm text-white">GitHub</p>
+                        <p class="text-xs text-gray-500">github.com/rafapastrello</p>
+                    </div>
+                </a>
+
+                <!-- IFMT -->
+                <div class="flex items-center gap-4 px-5 py-4 rounded-xl bg-gray-800 border border-gray-700">
+                    <img src="/src/img/logos/logo_IF.png" alt="Logotipo Instituto Federal" class="w-5 h-5>" />
+                    <div>
+                        <p class="font-semibold text-sm text-white">IFMT</p>
+                        <p class="text-xs text-gray-500">TSI &bull; 1° Semestre &bull; Ingresso 2026</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- RODAPÉ -->
+    <footer class="border-t border-gray-800 bg-gray-900">
+        <div class="max-w-5xl mx-auto px-6 py-6 flex flex-col md:flex-row items-center justify-between gap-3">
+            <p class="text-xs text-gray-600">© 2026 Rafaela Pastrello Silva — IFMT &bull; TSI</p>
+            <a href="#" class="text-xs text-gray-600 hover:text-green-500 transition-colors duration-200 font-medium">↑
+                Voltar ao topo</a>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS — apenas animações de scroll, sem interatividade de input -->
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <script>
+        // Animação de revelação ao rolar
+        const elementosAnimados = document.querySelectorAll('.opacity-0.translate-y-7');
+        const observadorRevelacao = new IntersectionObserver(entradas => {
+            entradas.forEach(entrada => {
+                if (entrada.isIntersecting) {
+                    entrada.target.classList.remove('opacity-0', 'translate-y-7');
+                }
+            });
+        }, { threshold: 0.08 });
+        elementosAnimados.forEach(el => observadorRevelacao.observe(el));
+
+        // Rolagem suave
+        document.querySelectorAll('a[href^="#"]').forEach(link => {
+            link.addEventListener('click', evento => {
+                const destino = document.querySelector(link.getAttribute('href'));
+                if (destino) {
+                    evento.preventDefault();
+                    destino.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+
+</body>
+
+</html>
