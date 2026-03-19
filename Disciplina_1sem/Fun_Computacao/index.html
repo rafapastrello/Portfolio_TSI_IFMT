@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fundamentos da Computação — Rafaela Pastrello</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        poppins: ['Poppins', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    },
+                    keyframes: {
+                        aparecerCima: {
+                            '0%': { opacity: '0', transform: 'translateY(24px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        piscar: {
+                            '0%,100%': { opacity: '1' },
+                            '50%': { opacity: '0.4' }
+                        },
+                        blob: {
+                            '0%,100%': { borderRadius: '60% 40% 55% 45% / 50% 60% 40% 50%' },
+                            '50%': { borderRadius: '40% 60% 45% 55% / 60% 40% 60% 40%' }
+                        },
+                        slideIn: {
+                            '0%': { opacity: '0', transform: 'translateX(-16px)' },
+                            '100%': { opacity: '1', transform: 'translateX(0)' }
+                        },
+                    },
+                    animation: {
+                        aparecerCima: 'aparecerCima 0.6s ease forwards',
+                        piscar: 'piscar 2s ease-in-out infinite',
+                        blob: 'blob 7s ease-in-out infinite',
+                        slideIn: 'slideIn 0.5s ease forwards',
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        .tag-logica {
+            background: rgba(234, 179, 8, 0.1);
+            color: #fde047;
+            border-color: rgba(234, 179, 8, 0.2);
+        }
+
+        .tag-arq {
+            background: rgba(239, 68, 68, 0.1);
+            color: #f87171;
+            border-color: rgba(239, 68, 68, 0.2);
+        }
+
+        .tag-so {
+            background: rgba(59, 130, 246, 0.1);
+            color: #60a5fa;
+            border-color: rgba(59, 130, 246, 0.2);
+        }
+
+        .tag-redes {
+            background: rgba(234, 179, 8, 0.1);
+            color: #facc15;
+            border-color: rgba(234, 179, 8, 0.2);
+        }
+
+        .tag-misc {
+            background: rgba(16, 185, 129, 0.1);
+            color: #34d399;
+            border-color: rgba(16, 185, 129, 0.2);
+        }
+
+        .progress-bar {
+            background: linear-gradient(90deg, #eab308, #ca8a04);
+            border-radius: 999px;
+            height: 6px;
+            transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .code-block {
+            font-family: 'Fira Code', monospace;
+            background: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .code-header {
+            background: #161b22;
+            border-bottom: 1px solid #30363d;
+            padding: 10px 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .dot { width: 12px; height: 12px; border-radius: 50%; }
+        .dot-red { background: #ff5f57; }
+        .dot-yellow { background: #ffbd2e; }
+        .dot-green { background: #28c840; }
+
+        .timeline-line {
+            position: absolute;
+            left: 19px;
+            top: 32px;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, #eab308 0%, #374151 100%);
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .skill-card:hover .progress-bar {
+            filter: brightness(1.2);
+        }
+
+        .nav-pill { transition: all 0.2s; }
+
+        .nav-pill:hover {
+            background: rgba(234, 179, 8, 0.1);
+            color: #eab308;
+        }
+
+        .nav-pill.active {
+            background: rgba(234, 179, 8, 0.15);
+            color: #eab308;
+            border-color: rgba(234, 179, 8, 0.3);
+        }
+
+        /* Syntax highlight colors */
+        .kw { color: #ff79c6; }
+        .fn { color: #50fa7b; }
+        .str { color: #f1fa8c; }
+        .tag-syn { color: #ff79c6; }
+        .attr { color: #50fa7b; }
+        .val { color: #f1fa8c; }
+        .cm { color: #6272a4; font-style: italic; }
+        .prop { color: #8be9fd; }
+        .num { color: #bd93f9; }
+        .op { color: #ff79c6; }
+
+        .accent { color: #eab308; }
+        .accent-border { border-color: rgba(234, 179, 8, 0.5); }
+    </style>
+</head>
+
+<body class="bg-gray-900 text-gray-100 antialiased font-poppins">
+
+    <!-- NAVEGAÇÃO -->
+    <nav class="sticky top-0 z-50 bg-gray-900/80 backdrop-blur-md border-b border-gray-800">
+        <div class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="/" class="text-base font-extrabold text-white hover:text-yellow-500 transition-colors">
+                portfólio<span class="text-yellow-500">.</span>
+            </a>
+            <div class="hidden md:flex items-center gap-2">
+                <a href="#sobre-disciplina"
+                    class="nav-pill text-sm font-medium text-gray-400 px-4 py-1.5 rounded-full border border-transparent">Sobre</a>
+                <a href="#atividades"
+                    class="nav-pill text-sm font-medium text-gray-400 px-4 py-1.5 rounded-full border border-transparent">Atividades</a>
+                <a href="#habilidades"
+                    class="nav-pill text-sm font-medium text-gray-400 px-4 py-1.5 rounded-full border border-transparent">Habilidades</a>
+            </div>
+            <a href="index.html#disciplinas"
+                class="inline-flex items-center gap-2 text-sm font-semibold px-5 py-2 rounded-full border border-gray-700 text-gray-300 hover:border-yellow-500 hover:text-yellow-500 transition-all duration-200">
+                ← Voltar
+            </a>
+        </div>
+    </nav>
+
+    <!-- BREADCRUMB -->
+    <div class="max-w-5xl mx-auto px-6 pt-6 pb-2">
+        <div class="flex items-center gap-2 text-xs text-gray-600">
+            <a href="index.html" class="hover:text-yellow-500 transition-colors">Portfólio</a>
+            <span>/</span>
+            <a href="index.html#disciplinas" class="hover:text-yellow-500 transition-colors">Disciplinas</a>
+            <span>/</span>
+            <span class="text-yellow-500 font-medium">Fundamentos da Computação</span>
+        </div>
+    </div>
+
+    <!-- HERO DA DISCIPLINA -->
+    <section class="relative max-w-5xl mx-auto px-6 pt-10 pb-20 overflow-hidden">
+        <div
+            class="absolute -top-20 -right-20 w-96 h-96 rounded-full bg-yellow-500/8 blur-3xl animate-blob pointer-events-none">
+        </div>
+        <div class="absolute top-20 -left-16 w-56 h-56 rounded-full bg-yellow-500/5 blur-2xl pointer-events-none"></div>
+
+        <div class="relative z-10 flex flex-col md:flex-row items-start gap-12">
+            <div class="flex-1 animate-aparecerCima">
+                <!-- Badge da disciplina -->
+                <div class="flex items-center gap-3 mb-6">
+                    <span
+                        class="inline-flex items-center gap-2 text-xs font-semibold px-3 py-1.5 rounded-full bg-yellow-500/10 text-yellow-400 border border-yellow-500/20">
+                        <span class="w-2 h-2 rounded-full bg-yellow-400 animate-piscar"></span>
+                        Em andamento · 1° Semestre 2026
+                    </span>
+                    <span
+                        class="text-xs font-medium px-3 py-1.5 rounded-full bg-gray-800 text-gray-400 border border-gray-700">TSI
+                        — IFMT</span>
+                </div>
+
+                <!-- Ícone + Título -->
+                <div class="flex items-center gap-4 mb-5">
+                    <div
+                        class="w-16 h-16 rounded-2xl bg-yellow-500/10 border border-yellow-500/20 flex items-center justify-center text-4xl flex-shrink-0">
+                        🖥️
+                    </div>
+                    <div>
+                        <h1 class="text-3xl md:text-4xl font-extrabold leading-tight text-white">
+                            Fundamentos da<br /><span class="text-yellow-400">Computação</span>
+                        </h1>
+                    </div>
+                </div>
+
+                <p class="text-gray-400 text-sm leading-relaxed mb-6 max-w-lg">
+                    Disciplina que explora os alicerces teóricos e práticos da computação. Da lógica booleana à
+                    arquitetura de computadores, sistemas operacionais e redes — aqui compreendo
+                    como as máquinas funcionam de verdade.
+                </p>
+
+                <!-- Tags de tecnologia -->
+                <div class="flex flex-wrap gap-2 mb-6">
+                    <span class="tag-logica text-[11px] font-semibold px-3 py-1.5 rounded-full border">Lógica Booleana</span>
+                    <span class="tag-arq text-[11px] font-semibold px-3 py-1.5 rounded-full border">Arq. de Computadores</span>
+                    <span class="tag-so text-[11px] font-semibold px-3 py-1.5 rounded-full border">Sistemas Operacionais</span>
+                    <span class="tag-redes text-[11px] font-semibold px-3 py-1.5 rounded-full border">Redes</span>
+                    <span class="tag-misc text-[11px] font-semibold px-3 py-1.5 rounded-full border">Sistemas Numéricos</span>
+                    <span class="tag-logica text-[11px] font-semibold px-3 py-1.5 rounded-full border">Álgebra de Boole</span>
+                    <span class="tag-so text-[11px] font-semibold px-3 py-1.5 rounded-full border">Memória & CPU</span>
+                    <span class="tag-misc text-[11px] font-semibold px-3 py-1.5 rounded-full border">Representação de Dados</span>
+                </div>
+
+                <!-- Stats rápidas -->
+                <div class="flex flex-wrap gap-3">
+                    <div class="px-5 py-3 rounded-xl bg-gray-800 border border-gray-700 text-center">
+                        <p class="text-lg font-extrabold text-yellow-400">4</p>
+                        <p class="text-[11px] text-gray-500 font-medium">Atividades</p>
+                    </div>
+                    <div class="px-5 py-3 rounded-xl bg-gray-800 border border-gray-700 text-center">
+                        <p class="text-lg font-extrabold text-white">2</p>
+                        <p class="text-[11px] text-gray-500 font-medium">Projetos</p>
+                    </div>
+                    <div class="px-5 py-3 rounded-xl bg-gray-800 border border-gray-700 text-center">
+                        <p class="text-lg font-extrabold text-yellow-400">60h</p>
+                        <p class="text-[11px] text-gray-500 font-medium">Carga horária</p>
+                    </div>
+                    <div class="px-5 py-3 rounded-xl bg-gray-800 border border-gray-700 text-center">
+                        <p class="text-lg font-extrabold text-yellow-400">●●●○</p>
+                        <p class="text-[11px] text-gray-500 font-medium">Progresso</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bloco de código decorativo -->
+            <div class="w-full md:w-80 animate-aparecerCima [animation-delay:.2s] flex-shrink-0">
+                <div class="code-block text-xs leading-relaxed">
+                    <div class="code-header">
+                        <div class="dot dot-red"></div>
+                        <div class="dot dot-yellow"></div>
+                        <div class="dot dot-green"></div>
+                        <span class="ml-2 text-gray-500 font-mono text-[11px]">logica_booleana.txt</span>
+                    </div>
+                    <div class="p-4 font-mono text-[12px] leading-6 overflow-x-auto">
+                        <div><span class="cm">// Álgebra de Boole</span></div>
+                        <div><span class="prop">A</span> <span class="op">=</span> <span class="num">1</span>, <span class="prop">B</span> <span class="op">=</span> <span class="num">0</span></div>
+                        <div>&nbsp;</div>
+                        <div><span class="cm">// Operações lógicas</span></div>
+                        <div><span class="prop">AND</span>: <span class="num">1</span> <span class="op">∧</span> <span class="num">0</span> <span class="op">=</span> <span class="val">0</span></div>
+                        <div><span class="prop">OR</span> : <span class="num">1</span> <span class="op">∨</span> <span class="num">0</span> <span class="op">=</span> <span class="val">1</span></div>
+                        <div><span class="prop">NOT</span>: <span class="op">¬</span><span class="num">1</span> <span class="op">=</span> <span class="val">0</span></div>
+                        <div>&nbsp;</div>
+                        <div><span class="cm">// Decimal → Binário</span></div>
+                        <div><span class="num">42</span> <span class="op">=</span> <span class="fn">00101010</span></div>
+                        <div><span class="num">255</span> <span class="op">=</span> <span class="fn">11111111</span></div>
+                    </div>
+                </div>
+
+                <!-- Segundo snippet — Arquitetura -->
+                <div class="code-block text-xs leading-relaxed mt-3">
+                    <div class="code-header">
+                        <div class="dot dot-red"></div>
+                        <div class="dot dot-yellow"></div>
+                        <div class="dot dot-green"></div>
+                        <span class="ml-2 text-gray-500 font-mono text-[11px]">arquitetura.md</span>
+                    </div>
+                    <div class="p-4 font-mono text-[12px] leading-6">
+                        <div><span class="prop">CPU</span> {</div>
+                        <div class="pl-4"><span class="attr">ULA</span>: <span class="val">operações aritm.</span></div>
+                        <div class="pl-4"><span class="attr">UC</span> : <span class="val">controle de fluxo</span></div>
+                        <div class="pl-4"><span class="attr">REG</span>: <span class="val">memória rápida</span></div>
+                        <div>}</div>
+                        <div><span class="prop">MEM</span>: <span class="fn">RAM → Cache → HD</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SOBRE A DISCIPLINA -->
+    <section id="sobre-disciplina" class="reveal border-t border-gray-800 bg-gray-800/30">
+        <div class="max-w-5xl mx-auto px-6 py-16">
+            <div class="flex items-center gap-3 mb-8">
+                <span class="block w-10 h-1 bg-yellow-500 rounded-full"></span>
+                <h2 class="text-2xl font-bold text-white">Sobre a Disciplina</h2>
+            </div>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="md:col-span-2">
+                    <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                        <span class="text-white font-semibold">Fundamentos da Computação</span> é a disciplina que
+                        revela o que há por trás de qualquer sistema digital. Estudamos como computadores representam
+                        dados com <span class="text-yellow-400 font-mono text-xs">sistemas numéricos</span> (binário,
+                        octal, hexadecimal), como a <span class="text-red-400 font-mono text-xs">lógica booleana</span>
+                        governa circuitos e decisões, e como a <span class="text-blue-400 font-mono text-xs">arquitetura
+                        de Von Neumann</span> estrutura os computadores modernos.
+                    </p>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Abordamos também conceitos de <span class="text-yellow-400 font-mono text-xs">sistemas
+                        operacionais</span>, gerência de processos, memória e introdução a redes de computadores —
+                        formando uma base sólida para compreender qualquer área da tecnologia.
+                    </p>
+
+                    <!-- Ementa resumida -->
+                    <div class="mt-6 p-4 rounded-xl bg-gray-900 border border-gray-700">
+                        <p class="text-xs font-semibold text-yellow-400 mb-3 uppercase tracking-wider">Ementa resumida</p>
+                        <div class="grid grid-cols-2 gap-2 text-xs text-gray-400">
+                            <div class="flex items-center gap-2"><span class="text-yellow-400">✓</span> Sistemas de numeração (bin, oct, hex)</div>
+                            <div class="flex items-center gap-2"><span class="text-yellow-400">✓</span> Álgebra de Boole e portas lógicas</div>
+                            <div class="flex items-center gap-2"><span class="text-yellow-400">✓</span> Representação de dados (int, float, char)</div>
+                            <div class="flex items-center gap-2"><span class="text-yellow-400">✓</span> Arquitetura de Von Neumann</div>
+                            <div class="flex items-center gap-2"><span class="text-yellow-400">✓</span> CPU: ULA, UC e registradores</div>
+                            <div class="flex items-center gap-2"><span class="text-yellow-400">✓</span> Hierarquia de memória</div>
+                            <div class="flex items-center gap-2"><span class="text-yellow-400">✓</span> Sistemas operacionais e processos</div>
+                            <div class="flex items-center gap-2"><span class="text-yellow-400">◎</span> Introdução a redes de computadores</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card de informações -->
+                <div class="flex flex-col gap-3">
+                    <div class="p-4 rounded-xl bg-gray-900 border border-gray-700">
+                        <p class="text-[11px] text-gray-600 font-medium uppercase tracking-wider mb-3">Detalhes</p>
+                        <div class="flex flex-col gap-2.5 text-xs">
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-500">Curso</span>
+                                <span class="text-white font-medium">TSI · IFMT</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-500">Semestre</span>
+                                <span class="text-white font-medium">1° · 2026</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-500">Carga horária</span>
+                                <span class="text-yellow-400 font-semibold">60h</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-500">Modalidade</span>
+                                <span class="text-white font-medium">Presencial</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-500">Avaliação</span>
+                                <span class="text-white font-medium">Provas e atividades</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="https://github.com/rafapastrello" target="_blank" rel="noopener noreferrer"
+                        class="flex items-center gap-3 p-4 rounded-xl bg-gray-900 border border-gray-700 hover:border-yellow-500 transition-colors group">
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                            class="w-5 h-5 text-gray-400 group-hover:text-yellow-400 transition-colors"
+                            viewBox="0 0 24 24" fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                                clip-rule="evenodd" />
+                        </svg>
+                        <div>
+                            <p class="text-xs font-semibold text-white">Ver repositórios</p>
+                            <p class="text-[11px] text-gray-500">github.com/rafapastrello</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ATIVIDADES / LINHA DO TEMPO -->
+    <section id="atividades" class="reveal max-w-5xl mx-auto px-6 py-20">
+        <div class="flex items-center gap-3 mb-10">
+            <span class="block w-10 h-1 bg-yellow-500 rounded-full"></span>
+            <h2 class="text-2xl font-bold text-white">Atividades & Projetos</h2>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8 items-start">
+
+            <!-- Linha do tempo -->
+            <div>
+                <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-6">Cronograma de entregas</p>
+                <div class="relative pl-10">
+                    <div class="timeline-line"></div>
+
+                    <!-- Item 1 -->
+                    <div class="reveal relative mb-6">
+                        <div
+                            class="absolute -left-10 w-10 h-10 rounded-full bg-yellow-500/20 border-2 border-yellow-500 flex items-center justify-center">
+                            <span class="text-yellow-400 font-bold text-xs">01</span>
+                        </div>
+                        <div
+                            class="p-4 rounded-xl bg-gray-800 border border-gray-700 hover:border-yellow-500/50 transition-colors">
+                            <div class="flex items-start justify-between mb-2">
+                                <h4 class="font-semibold text-sm text-white">Conversão entre Sistemas Numéricos</h4>
+                                <span
+                                    class="text-[10px] px-2 py-0.5 rounded-full bg-yellow-500/10 text-yellow-400 border border-yellow-500/20 flex-shrink-0 ml-2">✓
+                                    Entregue</span>
+                            </div>
+                            <p class="text-xs text-gray-500 mb-3">Exercícios de conversão entre binário, octal, decimal
+                                e hexadecimal, com resolução passo a passo.</p>
+                            <div class="flex items-center gap-2 flex-wrap">
+                                <span class="tag-misc text-[10px] px-2 py-0.5 rounded-full border">Binário</span>
+                                <span class="tag-redes text-[10px] px-2 py-0.5 rounded-full border">Hexadecimal</span>
+                                <a href="https://github.com/rafapastrello" target="_blank"
+                                    class="text-[10px] text-yellow-400 hover:text-yellow-300 font-medium flex items-center gap-1">
+                                    <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
+                                        <path fill-rule="evenodd"
+                                            d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                    Ver no GitHub →
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 2 -->
+                    <div class="reveal relative mb-6">
+                        <div
+                            class="absolute -left-10 w-10 h-10 rounded-full bg-yellow-500/20 border-2 border-yellow-500 flex items-center justify-center">
+                            <span class="text-yellow-400 font-bold text-xs">02</span>
+                        </div>
+                        <div
+                            class="p-4 rounded-xl bg-gray-800 border border-gray-700 hover:border-yellow-500/50 transition-colors">
+                            <div class="flex items-start justify-between mb-2">
+                                <h4 class="font-semibold text-sm text-white">Tabelas-Verdade e Portas Lógicas</h4>
+                                <span
+                                    class="text-[10px] px-2 py-0.5 rounded-full bg-yellow-500/10 text-yellow-400 border border-yellow-500/20 flex-shrink-0 ml-2">✓
+                                    Entregue</span>
+                            </div>
+                            <p class="text-xs text-gray-500 mb-3">Construção de tabelas-verdade para expressões
+                                booleanas e identificação das portas lógicas correspondentes (AND, OR, NOT, NAND, NOR, XOR).</p>
+                            <div class="flex items-center gap-2 flex-wrap">
+                                <span class="tag-logica text-[10px] px-2 py-0.5 rounded-full border">Álgebra de Boole</span>
+                                <span class="tag-logica text-[10px] px-2 py-0.5 rounded-full border">Portas Lógicas</span>
+                                <a href="https://github.com/rafapastrello" target="_blank"
+                                    class="text-[10px] text-yellow-400 hover:text-yellow-300 font-medium flex items-center gap-1">
+                                    <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
+                                        <path fill-rule="evenodd"
+                                            d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                    Ver no GitHub →
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 3 -->
+                    <div class="reveal relative mb-6">
+                        <div
+                            class="absolute -left-10 w-10 h-10 rounded-full bg-yellow-500/20 border-2 border-yellow-500 flex items-center justify-center">
+                            <span class="text-yellow-400 font-bold text-xs">03</span>
+                        </div>
+                        <div
+                            class="p-4 rounded-xl bg-gray-800 border border-gray-700 hover:border-yellow-500/50 transition-colors">
+                            <div class="flex items-start justify-between mb-2">
+                                <h4 class="font-semibold text-sm text-white">Mapa de Arquitetura de Computadores</h4>
+                                <span
+                                    class="text-[10px] px-2 py-0.5 rounded-full bg-yellow-500/10 text-yellow-400 border border-yellow-500/20 flex-shrink-0 ml-2">✓
+                                    Entregue</span>
+                            </div>
+                            <p class="text-xs text-gray-500 mb-3">Diagrama e descrição dos componentes da arquitetura
+                                de Von Neumann: CPU (ULA + UC + registradores), memória e dispositivos de E/S.</p>
+                            <div class="flex items-center gap-2 flex-wrap">
+                                <span class="tag-arq text-[10px] px-2 py-0.5 rounded-full border">Von Neumann</span>
+                                <span class="tag-arq text-[10px] px-2 py-0.5 rounded-full border">CPU</span>
+                                <span class="tag-misc text-[10px] px-2 py-0.5 rounded-full border">Memória</span>
+                                <a href="https://github.com/rafapastrello" target="_blank"
+                                    class="text-[10px] text-yellow-400 hover:text-yellow-300 font-medium flex items-center gap-1">
+                                    <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
+                                        <path fill-rule="evenodd"
+                                            d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                    Ver no GitHub →
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 4 -->
+                    <div class="reveal relative mb-6">
+                        <div
+                            class="absolute -left-10 w-10 h-10 rounded-full bg-blue-500/20 border-2 border-blue-500 flex items-center justify-center">
+                            <span class="text-blue-400 font-bold text-xs">04</span>
+                        </div>
+                        <div
+                            class="p-4 rounded-xl bg-gray-800 border border-gray-700 hover:border-blue-500/50 transition-colors">
+                            <div class="flex items-start justify-between mb-2">
+                                <h4 class="font-semibold text-sm text-white">Seminário: Sistemas Operacionais</h4>
+                                <span
+                                    class="text-[10px] px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20 flex-shrink-0 ml-2">⟳
+                                    Em progresso</span>
+                            </div>
+                            <p class="text-xs text-gray-500 mb-3">Apresentação sobre conceitos de sistemas operacionais:
+                                gerência de processos, escalonamento, memória virtual e sistemas de arquivos.</p>
+                            <div class="flex items-center gap-2 flex-wrap">
+                                <span class="tag-so text-[10px] px-2 py-0.5 rounded-full border">Processos</span>
+                                <span class="tag-so text-[10px] px-2 py-0.5 rounded-full border">Escalonamento</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 5 -->
+                    <div class="reveal relative mb-6">
+                        <div
+                            class="absolute -left-10 w-10 h-10 rounded-full bg-gray-700 border-2 border-gray-600 flex items-center justify-center">
+                            <span class="text-gray-500 font-bold text-xs">05</span>
+                        </div>
+                        <div class="p-4 rounded-xl bg-gray-800/60 border border-gray-700/50">
+                            <div class="flex items-start justify-between mb-2">
+                                <h4 class="font-semibold text-sm text-gray-400">Próxima atividade</h4>
+                                <span
+                                    class="text-[10px] px-2 py-0.5 rounded-full bg-gray-700 text-gray-500 border border-gray-600 flex-shrink-0 ml-2">Em
+                                    breve</span>
+                            </div>
+                            <p class="text-xs text-gray-600 mb-3">Descrição.</p>
+                            <div class="flex items-center gap-2">
+                                <span class="text-[10px] px-2 py-0.5 rounded-full bg-gray-700/50 text-gray-600 border border-gray-700">Badge</span>
+                                <span class="text-[10px] px-2 py-0.5 rounded-full bg-gray-700/50 text-gray-600 border border-gray-700">Badge</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 6 -->
+                    <div class="reveal relative">
+                        <div
+                            class="absolute -left-10 w-10 h-10 rounded-full bg-gray-700 border-2 border-gray-600 flex items-center justify-center">
+                            <span class="text-gray-500 font-bold text-xs">06</span>
+                        </div>
+                        <div class="p-4 rounded-xl bg-gray-800/60 border border-gray-700/50">
+                            <div class="flex items-start justify-between mb-2">
+                                <h4 class="font-semibold text-sm text-gray-400">Próxima atividade</h4>
+                                <span
+                                    class="text-[10px] px-2 py-0.5 rounded-full bg-gray-700 text-gray-500 border border-gray-600 flex-shrink-0 ml-2">Em
+                                    breve</span>
+                            </div>
+                            <p class="text-xs text-gray-600 mb-3">Descrição.</p>
+                            <div class="flex items-center gap-2 flex-wrap">
+                                <span class="text-[10px] px-2 py-0.5 rounded-full bg-gray-700/50 text-gray-600 border border-gray-700">Badge</span>
+                                <span class="text-[10px] px-2 py-0.5 rounded-full bg-gray-700/50 text-gray-600 border border-gray-700">Badge</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Projetos em destaque -->
+            <div>
+                <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-6">Projetos em destaque</p>
+
+                <!-- Projeto 1 -->
+                <div
+                    class="reveal mb-4 rounded-2xl bg-gray-800 border border-gray-700 overflow-hidden hover:border-yellow-500/50 transition-colors group">
+                    <div class="h-2 bg-gradient-to-r from-yellow-500 to-yellow-700"></div>
+                    <div class="p-5">
+                        <div class="flex items-start justify-between mb-3">
+                            <div class="flex items-center gap-2">
+                                <span class="text-xl">🔢</span>
+                                <h4 class="font-semibold text-sm text-white">Conversor de Bases Numéricas</h4>
+                            </div>
+                            <span
+                                class="text-[10px] font-medium px-2 py-0.5 rounded-full bg-yellow-500/10 text-yellow-400 border border-yellow-500/20">Ativo</span>
+                        </div>
+                        <p class="text-xs text-gray-500 leading-relaxed mb-4">
+                            Ferramenta para converter números entre binário, octal, decimal e hexadecimal,
+                            com exibição do passo a passo das divisões e multiplicações.
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <div class="flex gap-2 flex-wrap">
+                                <span class="tag-misc text-[10px] px-2 py-0.5 rounded-full border">Binário</span>
+                                <span class="tag-redes text-[10px] px-2 py-0.5 rounded-full border">Hexa</span>
+                                <span class="tag-logica text-[10px] px-2 py-0.5 rounded-full border">Lógica</span>
+                            </div>
+                            <a href="https://github.com/rafapastrello" target="_blank"
+                                class="text-[11px] text-yellow-400 hover:text-yellow-300 font-medium">GitHub →</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Projeto 2 -->
+                <div
+                    class="reveal mb-4 rounded-2xl bg-gray-800 border border-gray-700 overflow-hidden hover:border-indigo-500/50 transition-colors group">
+                    <div class="h-2 bg-gradient-to-r from-indigo-500 to-indigo-700"></div>
+                    <div class="p-5">
+                        <div class="flex items-start justify-between mb-3">
+                            <div class="flex items-center gap-2">
+                                <span class="text-xl">⚙️</span>
+                                <h4 class="font-semibold text-sm text-white">Diagrama de Arquitetura Von Neumann</h4>
+                            </div>
+                            <span
+                                class="text-[10px] font-medium px-2 py-0.5 rounded-full bg-yellow-500/10 text-yellow-400 border border-yellow-500/20">Entregue</span>
+                        </div>
+                        <p class="text-xs text-gray-500 leading-relaxed mb-4">
+                            Diagrama interativo e documentado dos componentes da arquitetura clássica de Von Neumann,
+                            detalhando o ciclo de instrução fetch-decode-execute.
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <div class="flex gap-2 flex-wrap">
+                                <span class="tag-arq text-[10px] px-2 py-0.5 rounded-full border">CPU</span>
+                                <span class="tag-arq text-[10px] px-2 py-0.5 rounded-full border">ULA</span>
+                                <span class="tag-misc text-[10px] px-2 py-0.5 rounded-full border">Von Neumann</span>
+                            </div>
+                            <a href="https://github.com/rafapastrello" target="_blank"
+                                class="text-[11px] text-yellow-400 hover:text-yellow-300 font-medium">GitHub →</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Projeto 3 — em progresso -->
+                <div class="reveal rounded-2xl bg-gray-800/60 border border-gray-700/50 overflow-hidden">
+                    <div class="h-2 bg-gradient-to-r from-yellow-500/50 to-yellow-600/50"></div>
+                    <div class="p-5">
+                        <div class="flex items-start justify-between mb-3">
+                            <div class="flex items-center gap-2">
+                                <span class="text-xl">🗂️</span>
+                                <h4 class="font-semibold text-sm text-gray-400">Próximo projeto</h4>
+                            </div>
+                            <span
+                                class="text-[10px] font-medium px-2 py-0.5 rounded-full bg-yellow-500/10 text-yellow-400 border border-yellow-500/20">Em
+                                progresso</span>
+                        </div>
+                        <p class="text-xs text-gray-600 leading-relaxed mb-4">
+                            Descrição.
+                        </p>
+                        <div class="flex gap-2">
+                            <span class="text-[10px] px-2 py-0.5 rounded-full bg-gray-700/50 text-gray-600 border border-gray-700">Badge</span>
+                            <span class="text-[10px] px-2 py-0.5 rounded-full bg-gray-700/50 text-gray-600 border border-gray-700">Badge</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HABILIDADES -->
+    <section id="habilidades" class="reveal border-t border-gray-800 bg-gray-800/30">
+        <div class="max-w-5xl mx-auto px-6 py-20">
+            <div class="flex items-center gap-3 mb-10">
+                <span class="block w-10 h-1 bg-yellow-500 rounded-full"></span>
+                <h2 class="text-2xl font-bold text-white">Habilidades desenvolvidas</h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Sistemas Numéricos -->
+                <div class="skill-card reveal">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div
+                            class="w-9 h-9 rounded-xl bg-green-500/10 border border-green-500/20 flex items-center justify-center text-lg">
+                            🔢</div>
+                        <div>
+                            <p class="text-sm font-semibold text-white">Sistemas Numéricos</p>
+                            <p class="text-xs text-gray-500">Bin, Oct, Dec, Hex</p>
+                        </div>
+                        <span class="ml-auto text-sm font-bold text-green-400">90%</span>
+                    </div>
+                    <div class="h-1.5 bg-gray-700 rounded-full overflow-hidden">
+                        <div class="progress-bar"
+                            style="width: 90%; background: linear-gradient(90deg,#22c55e,#16a34a);"></div>
+                    </div>
+                    <p class="text-xs text-gray-600 mt-2">Conversões diretas e inversas com fluência entre as bases</p>
+                </div>
+
+                <!-- Álgebra de Boole -->
+                <div class="skill-card reveal">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div
+                            class="w-9 h-9 rounded-xl bg-yellow-500/10 border border-yellow-500/20 flex items-center justify-center text-lg">
+                            ⊕</div>
+                        <div>
+                            <p class="text-sm font-semibold text-white">Álgebra de Boole</p>
+                            <p class="text-xs text-gray-500">Lógica e portas</p>
+                        </div>
+                        <span class="ml-auto text-sm font-bold text-yellow-400">85%</span>
+                    </div>
+                    <div class="h-1.5 bg-gray-700 rounded-full overflow-hidden">
+                        <div class="progress-bar"
+                            style="width: 85%; background: linear-gradient(90deg,#eab308,#ca8a04);"></div>
+                    </div>
+                    <p class="text-xs text-gray-600 mt-2">Tabelas-verdade, simplificação, portas AND/OR/NOT/XOR/NAND</p>
+                </div>
+
+                <!-- Arquitetura de Computadores -->
+                <div class="skill-card reveal">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div
+                            class="w-9 h-9 rounded-xl bg-red-500/10 border border-red-500/20 flex items-center justify-center text-lg">
+                            🖥️</div>
+                        <div>
+                            <p class="text-sm font-semibold text-white">Arquitetura de Computadores</p>
+                            <p class="text-xs text-gray-500">Von Neumann e componentes</p>
+                        </div>
+                        <span class="ml-auto text-sm font-bold text-red-400">80%</span>
+                    </div>
+                    <div class="h-1.5 bg-gray-700 rounded-full overflow-hidden">
+                        <div class="progress-bar"
+                            style="width: 80%; background: linear-gradient(90deg,#ef4444,#dc2626);"></div>
+                    </div>
+                    <p class="text-xs text-gray-600 mt-2">CPU, ULA, UC, registradores, barramentos e memória</p>
+                </div>
+
+                <!-- Representação de Dados -->
+                <div class="skill-card reveal">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div
+                            class="w-9 h-9 rounded-xl bg-yellow-500/10 border border-yellow-500/20 flex items-center justify-center text-lg">
+                            📦</div>
+                        <div>
+                            <p class="text-sm font-semibold text-white">Representação de Dados</p>
+                            <p class="text-xs text-gray-500">Int, float, char, Unicode</p>
+                        </div>
+                        <span class="ml-auto text-sm font-bold text-yellow-400">75%</span>
+                    </div>
+                    <div class="h-1.5 bg-gray-700 rounded-full overflow-hidden">
+                        <div class="progress-bar"
+                            style="width: 75%; background: linear-gradient(90deg,#eab308,#ca8a04);"></div>
+                    </div>
+                    <p class="text-xs text-gray-600 mt-2">Complemento de 2, ponto flutuante (IEEE 754), ASCII/Unicode</p>
+                </div>
+
+                <!-- Sistemas Operacionais -->
+                <div class="skill-card reveal">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div
+                            class="w-9 h-9 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-lg">
+                            ⚙️</div>
+                        <div>
+                            <p class="text-sm font-semibold text-white">Sistemas Operacionais</p>
+                            <p class="text-xs text-gray-500">Processos e gerência</p>
+                        </div>
+                        <span class="ml-auto text-sm font-bold text-blue-400">70%</span>
+                    </div>
+                    <div class="h-1.5 bg-gray-700 rounded-full overflow-hidden">
+                        <div class="progress-bar"
+                            style="width: 70%; background: linear-gradient(90deg,#3b82f6,#2563eb);"></div>
+                    </div>
+                    <p class="text-xs text-gray-600 mt-2">Escalonamento de processos, memória virtual, sistemas de arquivos</p>
+                </div>
+
+                <!-- Redes de Computadores -->
+                <div class="skill-card reveal">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div
+                            class="w-9 h-9 rounded-xl bg-orange-500/10 border border-orange-500/20 flex items-center justify-center text-lg">
+                            🌐</div>
+                        <div>
+                            <p class="text-sm font-semibold text-white">Redes de Computadores</p>
+                            <p class="text-xs text-gray-500">Conceitos básicos</p>
+                        </div>
+                        <span class="ml-auto text-sm font-bold text-orange-400">60%</span>
+                    </div>
+                    <div class="h-1.5 bg-gray-700 rounded-full overflow-hidden">
+                        <div class="progress-bar"
+                            style="width: 60%; background: linear-gradient(90deg,#f97316,#ea580c);"></div>
+                    </div>
+                    <p class="text-xs text-gray-600 mt-2">Modelo OSI, TCP/IP, endereçamento IP — em aprendizado</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NAV ENTRE DISCIPLINAS -->
+    <section class="reveal border-t border-gray-800 bg-gray-800/20">
+        <div class="max-w-5xl mx-auto px-6 py-12">
+            <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider text-center mb-6">Outras disciplinas</p>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                <a href="/Disciplina_1sem/Fun_Front_End/"
+                    class="flex flex-col items-center gap-2 p-4 rounded-xl bg-gray-800 border border-gray-700 hover:border-green-500/50 hover:-translate-y-1 transition-all duration-200 no-underline text-center">
+                    <span class="text-2xl">🎨</span>
+                    <p class="text-xs font-semibold text-white leading-tight">Fund. de Front End</p>
+                </a>
+                <a href="#"
+                    class="flex flex-col items-center gap-2 p-4 rounded-xl bg-gray-800 border border-gray-700 hover:border-orange-500/50 hover:-translate-y-1 transition-all duration-200 no-underline text-center">
+                    <span class="text-2xl">💻</span>
+                    <p class="text-xs font-semibold text-white leading-tight">Fund. de Programação</p>
+                </a>
+                <a href="#"
+                    class="flex flex-col items-center gap-2 p-4 rounded-xl bg-gray-800 border border-gray-700 hover:border-blue-500/50 hover:-translate-y-1 transition-all duration-200 no-underline text-center">
+                    <span class="text-2xl">⚙️</span>
+                    <p class="text-xs font-semibold text-white leading-tight">Fund. Eng. Software</p>
+                </a>
+                <a href="#"
+                    class="flex flex-col items-center gap-2 p-4 rounded-xl bg-gray-800 border border-gray-700 hover:border-yellow-500/50 hover:-translate-y-1 transition-all duration-200 no-underline text-center">
+                    <span class="text-xl font-bold text-yellow-400">∑</span>
+                    <p class="text-xs font-semibold text-white leading-tight">Matemática Computacional</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- RODAPÉ -->
+    <footer class="border-t border-gray-800 bg-gray-900">
+        <div class="max-w-5xl mx-auto px-6 py-6 flex flex-col md:flex-row items-center justify-between gap-3">
+            <p class="text-xs text-gray-600">© 2026 Rafaela Pastrello Silva — IFMT · TSI · Fundamentos da Computação</p>
+            <div class="flex items-center gap-4">
+                <a href="index.html#disciplinas"
+                    class="text-xs text-gray-600 hover:text-yellow-500 transition-colors font-medium">← Todas as
+                    disciplinas</a>
+                <a href="#" class="text-xs text-gray-600 hover:text-yellow-500 transition-colors font-medium">↑ Topo</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll reveal
+        const reveals = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.07 });
+        reveals.forEach(el => observer.observe(el));
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(link => {
+            link.addEventListener('click', e => {
+                const target = document.querySelector(link.getAttribute('href'));
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Active nav highlight
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-pill');
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                if (window.scrollY >= section.offsetTop - 120) current = section.getAttribute('id');
+            });
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) link.classList.add('active');
+            });
+        });
+
+        // Animate progress bars when visible
+        const progressBars = document.querySelectorAll('.progress-bar');
+        progressBars.forEach(bar => {
+            const targetWidth = bar.style.width;
+            bar.style.width = '0';
+            const barEntry = new IntersectionObserver(([e]) => {
+                if (e.isIntersecting) {
+                    bar.style.width = targetWidth;
+                    barEntry.disconnect();
+                }
+            }, { threshold: 0.3 });
+            barEntry.observe(bar);
+        });
+    </script>
+
+</body>
+
+</html>
