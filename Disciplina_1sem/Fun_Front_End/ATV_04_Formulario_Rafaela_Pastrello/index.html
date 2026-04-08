@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário - Rafaela Pastrello</title>
+</head>
+
+<body>
+    <h1>FORMULÁRIO DE CONTATO</h1>
+
+    <br><br>
+
+    <h3>Form GET</h3>
+    <form action="formulario_get.php" method="get">
+        <fieldset>
+            <legend>Dados Pessoais</legend>
+
+            <div>
+                <label for="nome">Nome</label>
+                <input type="text" name="nome" required>
+            </div>
+
+            <div>
+                <label for="email">E-mail</label>
+                <input type="email" name="email" required>
+            </div>
+
+            <div>
+                <label for="cpf">CPF</label>
+                <input type="text" name="cpf" maxlength="11" required>
+            </div>
+
+            <div>
+                <label for="dt_nascimento">Data de Nascimento</label>
+                <input type="date" name="datanascimento" maxlength="11" required>
+            </div>
+
+            <div>
+                <input type="radio" name="sexo" value="MASCULINO">
+                <label for="masculino">MASCULINO</label>
+
+                <input type="radio" name="sexo" value="FEMININO">
+                <label for="feminino">FEMININO</label>
+            </div>
+
+            <div>
+                <label for="telefone">Telefone</label>
+                <input type="tel" name="telefone" maxlength="11" required>
+            </div>
+
+            <div>
+                <input type="submit">
+            </div>
+
+            <div>
+                <input type="reset">
+            </div>
+        </fieldset>
+    </form>
+
+    <br><br>
+
+    <h3>Form POST</h3>
+    <form action="formulario_post.php" method="post">
+        <fieldset>
+            <legend>Dados Pessoais</legend>
+
+            <div>
+                <label for="nome">Nome</label>
+                <input type="text" name="nome" required>
+            </div>
+
+            <div>
+                <label for="email">E-mail</label>
+                <input type="email" name="email" required>
+            </div>
+
+            <div>
+                <label for="cpf">CPF</label>
+                <input type="text" name="cpf" maxlength="11" required>
+            </div>
+
+            <div>
+                <label for="dt_nascimento">Data de Nascimento</label>
+                <input type="date" name="datanascimento" maxlength="11" required>
+            </div>
+
+            <div>
+                <input type="radio" name="sexo" value="MASCULINO">
+                <label for="masculino">MASCULINO</label>
+
+                <input type="radio" name="sexo" value="FEMININO">
+                <label for="feminino">FEMININO</label>
+            </div>
+
+            <div>
+                <label for="telefone">Telefone</label>
+                <input type="tel" name="telefone" maxlength="11" required>
+            </div>
+
+            <div>
+                <input type="submit">
+            </div>
+
+            <div>
+                <input type="reset">
+            </div>
+        </fieldset>
+    </form>
+
+</body>
+
+</html>

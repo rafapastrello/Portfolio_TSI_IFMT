@@ -1,0 +1,89 @@
+/* style.css */
+
+/* Configurações Gerais */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    color: #333;
+}
+
+/* Cabeçalho e Rodapé */
+header, footer {
+    background: #f4f4f4;
+    padding: 20px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+footer {
+    border-bottom: none;
+    border-top: 1px solid #ddd;
+    margin-top: auto;
+    font-size: 0.9em;
+    color: #777;
+}
+
+/* Layout Principal (Flexbox) */
+main {
+    display: flex;
+    flex: 1;
+}
+
+/* Menu Lateral */
+nav {
+    width: 200px;
+    background: #fafafa;
+    border-right: 1px solid #eee;
+    padding: 20px 0;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+nav a {
+    display: block;
+    padding: 12px 20px;
+    text-decoration: none;
+    color: #666;
+    transition: all 0.3s ease;
+}
+
+nav a:hover {
+    background: #eee;
+    color: #000;
+    padding-left: 25px; /* Efeito sutil de deslocamento */
+}
+
+/* Área de Conteúdo Central */
+section {
+    flex: 1;
+    padding: 40px;
+    line-height: 1.6;
+    max-width: 800px; /* Melhora a leitura em telas grandes */
+}
+
+h1 {
+    font-weight: 300;
+    margin-top: 0;
+    color: #222;
+}
+
+strong {
+    color: #000;
+}
+
+/* Ajuste para links dentro do conteúdo */
+section a {
+    color: #666;
+    text-decoration: underline;
+}
+
+section a:hover {
+    color: #000;
+}
