@@ -1,0 +1,62 @@
+Atividade: Validação de Formulário com JavaScript
+Disciplina: Programação Front-End
+
+Descrição da Atividade
+Nesta atividade, você deverá criar uma função em JavaScript responsável por validar o formulário desenvolvido na Atividade 4. A validação deve ser feita no lado do cliente, antes do envio dos dados.
+
+Requisitos de Validação
+O formulário deverá realizar as seguintes validações antes de ser enviado:
+
+Nome: deve ter tamanho maior que 2 e menor ou igual a 100 caracteres.
+E-mail: deve ter tamanho maior que 10 e menor ou igual a 100 caracteres.
+CPF: deve ter exatamente 11 caracteres e passar por uma validação de dígito verificador. (Utilize uma função pronta de validação de CPF — pesquise um exemplo na internet e adapte ao seu código.)
+Sexo: ao menos um dos radiobuttons deve estar selecionado.
+Telefone: deve conter exatamente 11 caracteres.
+Exemplo Base
+Utilize como referência o arquivo validacaoFormulario.html em anexo, que contém comentários e exemplos de como a função validaCampos() deve ser implementada.
+
+Exemplo: no código abaixo, o formulário chama a função validaCampos() ao ser submetido.
+
+<form onsubmit="return validaCampos()">
+  Nome: <input type="text" id="nome"><br>
+  <input type="radio" name="sexo" value="Masculino"> Masculino
+  <input type="radio" name="sexo" value="Feminino"> Feminino<br>
+  <input type="submit" value="Enviar">
+</form>
+Caso alguma validação falhe, o formulário deve exibir uma mensagem de alerta apropriada (por exemplo: alert("CPF inválido!");) e impedir o envio.
+
+Entrega
+Crie um novo arquivo HTML chamado validacao.html ou similar.
+Implemente o código JavaScript diretamente no documento (ou em um arquivo externo .js vinculado).
+Compacte todos os arquivos do projeto (HTML, CSS, JS, etc.) em um arquivo .zip.
+Publique o projeto no seu site pessoal do InfinityFree (ou serviço equivalente).
+No campo de respostas abertas, informe o link público da página principal (exemplo: https://seudominio.infinityfreeapp.com/validacao.html).
+Critérios de Avaliação
+Implementação correta das validações exigidas.
+Uso adequado de funções e estruturas do JavaScript.
+Mensagens claras de erro para o usuário.
+Organização e legibilidade do código.
+Publicação e envio do link correto (funcional no servidor InfinityFree).
+Referência de Validação de CPF
+Você pode pesquisar um exemplo de função pronta para validar CPF, como o modelo abaixo:
+
+function validarCPF(cpf) {
+  cpf = cpf.replace(/[^\d]+/g, '');
+  if (cpf.length !== 11 || /^(\d)\1+$/.test(cpf)) return false;
+
+  let soma = 0;
+  for (let i = 0; i < 9; i++) soma += parseInt(cpf.charAt(i)) * (10 - i);
+  let resto = 11 - (soma % 11);
+  if (resto === 10 || resto === 11) resto = 0;
+  if (resto !== parseInt(cpf.charAt(9))) return false;
+
+  soma = 0;
+  for (let i = 0; i < 10; i++) soma += parseInt(cpf.charAt(i)) * (11 - i);
+  resto = 11 - (soma % 11);
+  if (resto === 10 || resto === 11) resto = 0;
+  return resto === parseInt(cpf.charAt(10));
+}
+
+Informações Adicionais
+Utilize o exemplo do arquivo validacaoFormulario.html como base.
+É permitido melhorar o design com Tailwind(estilização sutil).

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<!-- Declaração do documento como HTML5 -->
+<html>
+<head>
+    <!-- Título mostrado na aba do navegador -->
+    <title>Validação de Campos do Formulário</title>
+    <!-- Exemplo de inclusão externa de script (comentado): aula.js -->
+    <!--script type="text/javascript" src="aula.js"></script-->
+    <script>
+    // Função chamada no onsubmit do formulário para validar os campos
+    function validaCampos() {
+        // O Javascript faz uso do atributo ID do elemento HTML para obter valores
+        // Guarda o valor do campo 'nome' em uma variável local
+        var nome = document.getElementById("nome").value;
+
+        // Verifica se o campo de status (radiobutton) tem alguma opção selecionada
+        // document.querySelector retorna o primeiro elemento que corresponde ao seletor
+        var statusSelecionado = document.querySelector('input[name="status"]:checked');
+
+        // Se nenhum radiobutton estiver selecionado, statusSelecionado será null
+        if (!statusSelecionado) {
+            // Alerta o usuário que precisa selecionar Ativo ou Inativo
+            alert("Por favor, selecione o status (Ativo ou Inativo).");
+            return false; // impede a submissão do formulário
+        }
+
+        // Verifica se o nome é maior que 2 caracteres (validação existente)
+        if (nome.length > 2) {
+            return true; // tudo OK: permite submissão
+        } else {
+            // Caso o nome seja inválido, informa o usuário e impede submissão
+            alert("Digite um nome válido");
+            return false;
+        }
+    }
+    </script>
+</head>
+<body>
+
+<p>Quando o formulário for enviado, a função validaCampos será chamada</p>
+<p>Se esta função retornar <b>false</b>, a submissão será cancelada</p>
+<p>Se esta função retornar <b>true</b>, a submissão será efetivada</p>
+
+<!-- O evento onsubmit é chamado toda vez que o formulário é enviado,
+    que por sua vez, espera um retorno da função validaCampos, para decidir
+    se envia ou não os dados do formulário -->
+<form action="/action_page.php" onsubmit="return validaCampos()">
+  <!-- Campo de texto para o nome do usuário -->
+  Nome: <input type="text" name="nome" id="nome">
+  <br>
+  <!-- Novo campo: grupo de radiobuttons para status -->
+  <!-- name igual entre os radios garante comportamento de seleção única -->
+  <label>
+    <input type="radio" name="status" value="ativo"> Ativo
+  </label>
+  <label>
+    <input type="radio" name="status" value="inativo"> Inativo
+  </label>
+  <br>
+  <!-- Botão de envio do formulário -->
+  <input type="submit" value="Enviar">
+</form>
+
+</body>
+</html>

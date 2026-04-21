@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário de Contato - Rafaela Pastrello</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-50 min-h-screen py-10 px-4">
+    <div class="max-w-lg mx-auto">
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-semibold text-gray-800 mb-2">Formulário de Contato</h1>
+            <p class="text-gray-500">Preencha seus dados abaixo</p>
+        </div>
+
+        <form id="formContato" action="formulario_post.php" method="post" onsubmit="return validaCampos()" class="bg-white rounded-lg shadow-sm border border-gray-100 p-6 space-y-5">
+            <div>
+                <label for="nome" class="block text-sm font-medium text-gray-700 mb-1">Nome</label>
+                <input type="text" name="nome" id="nome" class="nome w-full px-4 py-2 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition" placeholder="Seu nome completo" oninput="this.value = this.value.replace(/[0-9]/g, '')" required>
+                <p id="erro-nome" class="erro text-red-500 text-sm mt-1 hidden"></p>
+            </div>
+
+            <div>
+                <label for="email" class="block text-sm font-medium text-gray-700 mb-1">E-mail</label>
+                <input type="email" name="email" id="email" class="email w-full px-4 py-2 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition" placeholder="seu@email.com" required>
+                <p id="erro-email" class="erro text-red-500 text-sm mt-1 hidden"></p>
+            </div>
+
+            <div>
+                <label for="cpf" class="block text-sm font-medium text-gray-700 mb-1">CPF</label>
+                <input type="text" name="cpf" id="cpf" class="cpf w-full px-4 py-2 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition" placeholder="000.000.000-00" maxlength="14" oninput="mascaraCPF(this)" required>
+                <p id="erro-cpf" class="erro text-red-500 text-sm mt-1 hidden"></p>
+            </div>
+
+            <div>
+                <label for="datanascimento" class="block text-sm font-medium text-gray-700 mb-1">Data de Nascimento</label>
+                <input type="date" name="datanascimento" id="datanascimento" class="datanascimento w-full px-4 py-2 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition" required>
+                <p id="erro-data" class="erro text-red-500 text-sm mt-1 hidden"></p>
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Sexo</label>
+                <div class="flex gap-4">
+                    <label class="flex items-center gap-2 cursor-pointer">
+                        <input type="radio" name="sexo" value="MASCULINO" class="w-4 h-4 text-blue-600 focus:ring-blue-500">
+                        <span class="text-gray-600">Masculino</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                        <input type="radio" name="sexo" value="FEMININO" class="w-4 h-4 text-blue-600 focus:ring-blue-500">
+                        <span class="text-gray-600">Feminino</span>
+                    </label>
+                </div>
+                <p id="erro-sexo" class="erro text-red-500 text-sm mt-1 hidden"></p>
+            </div>
+
+            <div>
+                <label for="telefone" class="block text-sm font-medium text-gray-700 mb-1">Telefone</label>
+                <input type="tel" name="telefone" id="telefone" class="telefone w-full px-4 py-2 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition" placeholder="(00) 90000-0000" maxlength="15" oninput="mascaraTelefone(this)" required>
+                <p id="erro-telefone" class="erro text-red-500 text-sm mt-1 hidden"></p>
+            </div>
+
+            <div class="flex gap-3 pt-2">
+                <input type="submit" value="Enviar" class="flex-1 bg-blue-600 text-white py-2.5 rounded-md hover:bg-blue-700 transition cursor-pointer font-medium">
+                <input type="reset" value="Limpar" class="flex-1 bg-gray-100 text-gray-700 py-2.5 rounded-md hover:bg-gray-200 transition cursor-pointer font-medium">
+            </div>
+        </form>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
