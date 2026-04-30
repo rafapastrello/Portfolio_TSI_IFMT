@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Controle de Fluxo — Exercícios JS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-50 min-h-screen py-10 px-4">
+    <div class="max-w-md mx-auto">
+
+        <div class="text-center mb-8">
+            <h1 class="text-2xl font-semibold text-gray-800 mb-1">Controle de Fluxo</h1>
+            <p class="text-gray-500 text-sm">Exercícios de fixação — JavaScript</p>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-sm border border-gray-100 p-6 space-y-3">
+
+            <button onclick="rodarEx3()"
+                class="w-full text-left px-4 py-3 rounded-md border border-gray-200 hover:border-blue-400 hover:bg-blue-50 transition group">
+                <p class="text-sm font-medium text-gray-700 group-hover:text-blue-600">Exercício 3</p>
+                <p class="text-xs text-gray-400 mt-0.5">Positivo, Negativo ou Zero — if / else if / else</p>
+            </button>
+
+            <button onclick="rodarEx5()"
+                class="w-full text-left px-4 py-3 rounded-md border border-gray-200 hover:border-blue-400 hover:bg-blue-50 transition group">
+                <p class="text-sm font-medium text-gray-700 group-hover:text-blue-600">Exercício 5</p>
+                <p class="text-xs text-gray-400 mt-0.5">Sistema de Notas — if / else if / else</p>
+            </button>
+
+            <button onclick="rodarEx6()"
+                class="w-full text-left px-4 py-3 rounded-md border border-gray-200 hover:border-blue-400 hover:bg-blue-50 transition group">
+                <p class="text-sm font-medium text-gray-700 group-hover:text-blue-600">Exercício 6</p>
+                <p class="text-xs text-gray-400 mt-0.5">Nível de Habilidade — switch / case</p>
+            </button>
+
+            <button onclick="rodarEx7()"
+                class="w-full text-left px-4 py-3 rounded-md border border-gray-200 hover:border-blue-400 hover:bg-blue-50 transition group">
+                <p class="text-sm font-medium text-gray-700 group-hover:text-blue-600">Exercício 7</p>
+                <p class="text-xs text-gray-400 mt-0.5">Maior ou Menor de Idade — operador ternário</p>
+            </button>
+
+        </div>
+    </div>
+
+    <script>
+        function rodarEx3() {
+            let numero = Number(prompt("Digite um número:"));
+            if (numero > 0) {
+                alert("Positivo");
+            } else if (numero < 0) {
+                alert("Negativo");
+            } else {
+                alert("Zero");
+            }
+        }
+
+        function rodarEx5() {
+            let nota = Number(prompt("Digite sua nota (0 a 10):"));
+            if (nota >= 7) {
+                alert("Aprovado");
+            } else if (nota >= 5) {
+                alert("Recuperação");
+            } else {
+                alert("Reprovado");
+            }
+        }
+
+        function rodarEx6() {
+            let nivel = Number(prompt("Digite um número (1, 2 ou 3):"));
+            switch (nivel) {
+                case 1: alert("Iniciante");     break;
+                case 2: alert("Intermediário"); break;
+                case 3: alert("Avançado");      break;
+                default: alert("Número inválido. Digite 1, 2 ou 3.");
+            }
+        }
+
+        function rodarEx7() {
+            let idade = Number(prompt("Digite sua idade:"));
+            let resultado = idade >= 18 ? "Maior de idade" : "Menor de idade";
+            alert(resultado);
+        }
+    </script>
+
+</body>
+</html>
