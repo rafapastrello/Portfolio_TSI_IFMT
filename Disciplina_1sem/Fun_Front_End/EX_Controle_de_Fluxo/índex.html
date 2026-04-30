@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Controle de Fluxo — Exercícios JS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        poppins: ['Poppins', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    },
+                    keyframes: {
+                        aparecerCima: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        piscar: {
+                            '0%,100%': { opacity: '1' },
+                            '50%': { opacity: '0.3' }
+                        }
+                    },
+                    animation: {
+                        aparecerCima: 'aparecerCima 0.5s ease forwards',
+                        piscar: 'piscar 2s ease-in-out infinite',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .tag-js {
+            background: rgba(234, 179, 8, 0.1);
+            color: #facc15;
+            border-color: rgba(234, 179, 8, 0.2);
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Delay escalonado nos cards */
+        .card-delay-1 { transition-delay: 0.05s; }
+        .card-delay-2 { transition-delay: 0.15s; }
+        .card-delay-3 { transition-delay: 0.25s; }
+        .card-delay-4 { transition-delay: 0.35s; }
+
+        .code-block {
+            font-family: 'Fira Code', monospace;
+            background: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .code-header {
+            background: #161b22;
+            border-bottom: 1px solid #30363d;
+            padding: 8px 14px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .dot { width: 10px; height: 10px; border-radius: 50%; }
+        .dot-red    { background: #ff5f57; }
+        .dot-yellow { background: #ffbd2e; }
+        .dot-green  { background: #28c840; }
+
+        .kw  { color: #ff79c6; }
+        .fn  { color: #50fa7b; }
+        .str { color: #f1fa8c; }
+        .cm  { color: #6272a4; font-style: italic; }
+        .num { color: #bd93f9; }
+    </style>
+</head>
+
+<body class="bg-gray-900 text-gray-100 antialiased font-poppins">
+
+    <!-- NAVEGAÇÃO -->
+    <nav class="sticky top-0 z-50 bg-gray-900/80 backdrop-blur-md border-b border-gray-800">
+        <div class="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="/" class="text-base font-extrabold text-white hover:text-green-500 transition-colors">
+                portfólio<span class="text-green-500">.</span>
+            </a>
+            <a href="../index.html"
+                class="inline-flex items-center gap-2 text-sm font-semibold px-4 py-2 rounded-full border border-gray-700 text-gray-300 hover:border-green-500 hover:text-green-500 transition-all duration-200">
+                ← Voltar
+            </a>
+        </div>
+    </nav>
+
+    <!-- BREADCRUMB -->
+    <div class="max-w-4xl mx-auto px-6 pt-6 pb-2">
+        <div class="flex items-center gap-2 text-xs text-gray-600">
+            <a href="/" class="hover:text-green-500 transition-colors">Portfólio</a>
+            <span>/</span>
+            <a href="../index.html" class="hover:text-green-500 transition-colors">Fundamentos de Front End</a>
+            <span>/</span>
+            <span class="text-yellow-400 font-medium">Controle de Fluxo</span>
+        </div>
+    </div>
+
+    <!-- HERO -->
+    <section class="max-w-4xl mx-auto px-6 pt-10 pb-14">
+        <div class="animate-aparecerCima">
+            <!-- Badge -->
+            <div class="flex items-center gap-3 mb-5">
+                <span class="inline-flex items-center gap-2 text-xs font-semibold px-3 py-1.5 rounded-full bg-yellow-500/10 text-yellow-400 border border-yellow-500/20">
+                    <span class="w-2 h-2 rounded-full bg-yellow-400 animate-piscar"></span>
+                    Exercícios de fixação · JS
+                </span>
+                <span class="text-xs font-medium px-3 py-1.5 rounded-full bg-gray-800 text-gray-400 border border-gray-700">1° Semestre 2026</span>
+            </div>
+
+            <!-- Título -->
+            <div class="flex items-center gap-4 mb-4">
+                <div class="w-14 h-14 rounded-2xl bg-yellow-500/10 border border-yellow-500/20 flex items-center justify-center text-3xl flex-shrink-0">
+                    ⚡
+                </div>
+                <div>
+                    <h1 class="text-3xl md:text-4xl font-extrabold leading-tight text-white">
+                        Controle de <span class="text-yellow-400">Fluxo</span>
+                    </h1>
+                    <p class="text-gray-500 text-sm mt-1">4 exercícios — if/else, switch e operador ternário</p>
+                </div>
+            </div>
+
+            <p class="text-gray-400 text-sm leading-relaxed max-w-xl">
+                Exercícios práticos para fixar as estruturas de controle de fluxo em JavaScript.
+                Clique em <span class="text-yellow-400 font-semibold">Executar</span> em cada card para rodar o exercício no navegador.
+            </p>
+        </div>
+    </section>
+
+    <!-- GRID DE EXERCÍCIOS -->
+    <section class="max-w-4xl mx-auto px-6 pb-20">
+        <div class="grid md:grid-cols-2 gap-5">
+
+            <!-- Exercício 3 -->
+            <div class="reveal card-delay-1 rounded-2xl bg-gray-800 border border-gray-700 overflow-hidden hover:border-yellow-500/40 transition-colors group">
+                <div class="h-1 bg-gradient-to-r from-yellow-400 to-yellow-600"></div>
+                <div class="p-5">
+                    <!-- Cabeçalho do card -->
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex items-center gap-3">
+                            <span class="w-9 h-9 rounded-xl bg-yellow-500/10 border border-yellow-500/20 flex items-center justify-center text-sm font-bold text-yellow-400">03</span>
+                            <div>
+                                <h2 class="font-bold text-sm text-white">Positivo, Negativo ou Zero</h2>
+                                <p class="text-[11px] text-gray-500 mt-0.5">Estrutura if / else if / else</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Preview de código -->
+                    <div class="code-block text-[11px] mb-4">
+                        <div class="code-header">
+                            <div class="dot dot-red"></div>
+                            <div class="dot dot-yellow"></div>
+                            <div class="dot dot-green"></div>
+                            <span class="ml-2 text-gray-500 text-[10px] font-mono">ex3.js</span>
+                        </div>
+                        <div class="p-3 font-mono leading-6">
+                            <div><span class="kw">if</span> (numero &gt; <span class="num">0</span>) {</div>
+                            <div class="pl-4"><span class="fn">alert</span>(<span class="str">"Positivo"</span>);</div>
+                            <div>} <span class="kw">else if</span> (numero &lt; <span class="num">0</span>) {</div>
+                            <div class="pl-4"><span class="fn">alert</span>(<span class="str">"Negativo"</span>);</div>
+                            <div>} <span class="kw">else</span> {</div>
+                            <div class="pl-4"><span class="fn">alert</span>(<span class="str">"Zero"</span>);</div>
+                            <div>}</div>
+                        </div>
+                    </div>
+
+                    <!-- O que aprende -->
+                    <p class="text-xs text-gray-500 mb-4">
+                        Dado um número digitado pelo usuário, identifica se é positivo, negativo ou zero usando <span class="text-yellow-400 font-mono text-[11px]">if / else if / else</span>.
+                    </p>
+
+                    <!-- Botão -->
+                    <button onclick="rodarEx3()"
+                        class="w-full py-2.5 rounded-xl bg-yellow-500/10 border border-yellow-500/20 text-yellow-400 text-sm font-semibold hover:bg-yellow-500/20 hover:border-yellow-500/40 transition-all duration-200 group-hover:shadow-sm">
+                        ▶ Executar exercício
+                    </button>
+                </div>
+            </div>
+
+            <!-- Exercício 5 -->
+            <div class="reveal card-delay-2 rounded-2xl bg-gray-800 border border-gray-700 overflow-hidden hover:border-green-500/40 transition-colors group">
+                <div class="h-1 bg-gradient-to-r from-green-400 to-green-600"></div>
+                <div class="p-5">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex items-center gap-3">
+                            <span class="w-9 h-9 rounded-xl bg-green-500/10 border border-green-500/20 flex items-center justify-center text-sm font-bold text-green-400">05</span>
+                            <div>
+                                <h2 class="font-bold text-sm text-white">Sistema de Notas</h2>
+                                <p class="text-[11px] text-gray-500 mt-0.5">Estrutura if / else if / else</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="code-block text-[11px] mb-4">
+                        <div class="code-header">
+                            <div class="dot dot-red"></div>
+                            <div class="dot dot-yellow"></div>
+                            <div class="dot dot-green"></div>
+                            <span class="ml-2 text-gray-500 text-[10px] font-mono">ex5.js</span>
+                        </div>
+                        <div class="p-3 font-mono leading-6">
+                            <div><span class="kw">if</span> (nota &gt;= <span class="num">7</span>) {</div>
+                            <div class="pl-4"><span class="fn">alert</span>(<span class="str">"Aprovado"</span>);</div>
+                            <div>} <span class="kw">else if</span> (nota &gt;= <span class="num">5</span>) {</div>
+                            <div class="pl-4"><span class="fn">alert</span>(<span class="str">"Recuperação"</span>);</div>
+                            <div>} <span class="kw">else</span> {</div>
+                            <div class="pl-4"><span class="fn">alert</span>(<span class="str">"Reprovado"</span>);</div>
+                            <div>}</div>
+                        </div>
+                    </div>
+
+                    <p class="text-xs text-gray-500 mb-4">
+                        Classifica a nota do aluno em Aprovado (≥7), Recuperação (≥5) ou Reprovado (&lt;5). A ordem das condições é essencial.
+                    </p>
+
+                    <button onclick="rodarEx5()"
+                        class="w-full py-2.5 rounded-xl bg-green-500/10 border border-green-500/20 text-green-400 text-sm font-semibold hover:bg-green-500/20 hover:border-green-500/40 transition-all duration-200">
+                        ▶ Executar exercício
+                    </button>
+                </div>
+            </div>
+
+            <!-- Exercício 6 -->
+            <div class="reveal card-delay-3 rounded-2xl bg-gray-800 border border-gray-700 overflow-hidden hover:border-blue-500/40 transition-colors group">
+                <div class="h-1 bg-gradient-to-r from-blue-400 to-blue-600"></div>
+                <div class="p-5">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex items-center gap-3">
+                            <span class="w-9 h-9 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-sm font-bold text-blue-400">06</span>
+                            <div>
+                                <h2 class="font-bold text-sm text-white">Nível de Habilidade</h2>
+                                <p class="text-[11px] text-gray-500 mt-0.5">Estrutura switch / case</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="code-block text-[11px] mb-4">
+                        <div class="code-header">
+                            <div class="dot dot-red"></div>
+                            <div class="dot dot-yellow"></div>
+                            <div class="dot dot-green"></div>
+                            <span class="ml-2 text-gray-500 text-[10px] font-mono">ex6.js</span>
+                        </div>
+                        <div class="p-3 font-mono leading-6">
+                            <div><span class="kw">switch</span> (nivel) {</div>
+                            <div class="pl-4"><span class="kw">case</span> <span class="num">1</span>: <span class="fn">alert</span>(<span class="str">"Iniciante"</span>); <span class="kw">break</span>;</div>
+                            <div class="pl-4"><span class="kw">case</span> <span class="num">2</span>: <span class="fn">alert</span>(<span class="str">"Intermediário"</span>); <span class="kw">break</span>;</div>
+                            <div class="pl-4"><span class="kw">case</span> <span class="num">3</span>: <span class="fn">alert</span>(<span class="str">"Avançado"</span>); <span class="kw">break</span>;</div>
+                            <div class="pl-4"><span class="kw">default</span>: <span class="fn">alert</span>(<span class="str">"Inválido"</span>);</div>
+                            <div>}</div>
+                        </div>
+                    </div>
+
+                    <p class="text-xs text-gray-500 mb-4">
+                        Recebe um número de 1 a 3 e retorna o nível correspondente. O <span class="text-blue-400 font-mono text-[11px]">switch</span> compara valores exatos e o <span class="text-blue-400 font-mono text-[11px]">break</span> impede a execução dos cases seguintes.
+                    </p>
+
+                    <button onclick="rodarEx6()"
+                        class="w-full py-2.5 rounded-xl bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-semibold hover:bg-blue-500/20 hover:border-blue-500/40 transition-all duration-200">
+                        ▶ Executar exercício
+                    </button>
+                </div>
+            </div>
+
+            <!-- Exercício 7 -->
+            <div class="reveal card-delay-4 rounded-2xl bg-gray-800 border border-gray-700 overflow-hidden hover:border-purple-500/40 transition-colors group">
+                <div class="h-1 bg-gradient-to-r from-purple-400 to-purple-600"></div>
+                <div class="p-5">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex items-center gap-3">
+                            <span class="w-9 h-9 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-sm font-bold text-purple-400">07</span>
+                            <div>
+                                <h2 class="font-bold text-sm text-white">Maior ou Menor de Idade</h2>
+                                <p class="text-[11px] text-gray-500 mt-0.5">Operador ternário ( ? : )</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="code-block text-[11px] mb-4">
+                        <div class="code-header">
+                            <div class="dot dot-red"></div>
+                            <div class="dot dot-yellow"></div>
+                            <div class="dot dot-green"></div>
+                            <span class="ml-2 text-gray-500 text-[10px] font-mono">ex7.js</span>
+                        </div>
+                        <div class="p-3 font-mono leading-6">
+                            <div><span class="cm">// condição ? se verdadeiro : se falso</span></div>
+                            <div><span class="kw">let</span> resultado =</div>
+                            <div class="pl-4">idade &gt;= <span class="num">18</span></div>
+                            <div class="pl-8">? <span class="str">"Maior de idade"</span></div>
+                            <div class="pl-8">: <span class="str">"Menor de idade"</span>;</div>
+                        </div>
+                    </div>
+
+                    <p class="text-xs text-gray-500 mb-4">
+                        Verifica se a idade digitada é maior ou menor de 18 anos usando o <span class="text-purple-400 font-mono text-[11px]">operador ternário</span> — um if/else compacto em uma única linha.
+                    </p>
+
+                    <button onclick="rodarEx7()"
+                        class="w-full py-2.5 rounded-xl bg-purple-500/10 border border-purple-500/20 text-purple-400 text-sm font-semibold hover:bg-purple-500/20 hover:border-purple-500/40 transition-all duration-200">
+                        ▶ Executar exercício
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- RODAPÉ -->
+    <footer class="border-t border-gray-800 bg-gray-900">
+        <div class="max-w-4xl mx-auto px-6 py-5 flex flex-col md:flex-row items-center justify-between gap-3">
+            <p class="text-xs text-gray-600">© 2026 Rafaela Pastrello Silva — IFMT · TSI · Fundamentos de Front End</p>
+            <a href="../index.html" class="text-xs text-gray-600 hover:text-green-500 transition-colors font-medium">← Voltar à disciplina</a>
+        </div>
+    </footer>
+
+    <script>
+        // ─── Exercício 3 — if / else if / else ──────────────────────────────────
+        function rodarEx3() {
+            let numero = Number(prompt("Exercício 3 — Digite um número:"));
+            if (numero > 0) {
+                alert("Positivo");
+            } else if (numero < 0) {
+                alert("Negativo");
+            } else {
+                alert("Zero");
+            }
+        }
+
+        // ─── Exercício 5 — Sistema de notas ─────────────────────────────────────
+        function rodarEx5() {
+            let nota = Number(prompt("Exercício 5 — Digite sua nota (0 a 10):"));
+            if (nota >= 7) {
+                alert("Aprovado");
+            } else if (nota >= 5) {
+                alert("Recuperação");
+            } else {
+                alert("Reprovado");
+            }
+        }
+
+        // ─── Exercício 6 — switch ────────────────────────────────────────────────
+        function rodarEx6() {
+            let nivel = Number(prompt("Exercício 6 — Digite um número (1, 2 ou 3):"));
+            switch (nivel) {
+                case 1: alert("Iniciante");     break;
+                case 2: alert("Intermediário"); break;
+                case 3: alert("Avançado");      break;
+                default: alert("Número inválido. Digite 1, 2 ou 3.");
+            }
+        }
+
+        // ─── Exercício 7 — operador ternário ────────────────────────────────────
+        function rodarEx7() {
+            let idade = Number(prompt("Exercício 7 — Digite sua idade:"));
+            let resultado = idade >= 18 ? "Maior de idade" : "Menor de idade";
+            alert(resultado);
+        }
+
+        // ─── Scroll reveal ───────────────────────────────────────────────────────
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+
+</body>
+</html>
