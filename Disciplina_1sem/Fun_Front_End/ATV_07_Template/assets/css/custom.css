@@ -1,0 +1,268 @@
+/*
+  Telenova Tecnologia — Custom CSS
+  Paleta oficial:
+    Azul Stratos  #00144F (primária)
+    Cinza Fuscous #535351 (secundária)
+    Branco        #FFFFFF (fundos)
+*/
+
+/* ─── Variáveis de cor ──────────────────────────────────── */
+:root {
+  --bs-primary: #00144F;
+  --bs-primary-rgb: 0, 20, 79;
+  --bs-secondary: #535351;
+  --bs-secondary-rgb: 83, 83, 81;
+}
+
+/* ─── Links ─────────────────────────────────────────────── */
+a { color: #00144F; }
+a:hover { color: #001a6b; }
+
+/* ─── Utilitários de cor ─────────────────────────────────── */
+.text-primary  { color: #00144F !important; }
+.text-secondary{ color: #535351 !important; }
+.bg-primary    { background-color: #00144F !important; }
+.bg-secondary  { background-color: #535351 !important; }
+
+/* ─── Botão primário ─────────────────────────────────────── */
+.btn-primary {
+  color: #fff;
+  background-color: #00144F;
+  border-color: #00144F;
+}
+.btn-primary:hover {
+  color: #fff;
+  background-color: #001a6b;
+  border-color: #001a6b;
+}
+.btn-primary:focus, .btn-primary.focus {
+  color: #fff;
+  background-color: #001a6b;
+  border-color: #001a6b;
+  box-shadow: 0 0 0 0.25rem rgba(0, 20, 79, 0.5);
+}
+.btn-primary:active, .btn-primary.active,
+.show > .btn-primary.dropdown-toggle {
+  color: #fff;
+  background-color: #00103b;
+  border-color: #000e35;
+}
+.btn-primary:disabled, .btn-primary.disabled {
+  color: #fff;
+  background-color: #00144F;
+  border-color: #00144F;
+}
+
+/* ─── Botão secundário ───────────────────────────────────── */
+.btn-secondary {
+  color: #fff;
+  background-color: #535351;
+  border-color: #535351;
+}
+.btn-secondary:hover {
+  color: #fff;
+  background-color: #404040;
+  border-color: #3a3a3a;
+}
+.btn-secondary:focus, .btn-secondary.focus {
+  color: #fff;
+  background-color: #404040;
+  border-color: #3a3a3a;
+  box-shadow: 0 0 0 0.25rem rgba(83, 83, 81, 0.5);
+}
+.btn-secondary:active, .btn-secondary.active,
+.show > .btn-secondary.dropdown-toggle {
+  color: #fff;
+  background-color: #3a3a3a;
+  border-color: #353535;
+}
+.btn-secondary:disabled, .btn-secondary.disabled {
+  color: #fff;
+  background-color: #535351;
+  border-color: #535351;
+}
+
+/* ─── Botão outline primário ─────────────────────────────── */
+.btn-outline-primary {
+  color: #00144F;
+  border-color: #00144F;
+}
+.btn-outline-primary:hover {
+  color: #fff;
+  background-color: #00144F;
+  border-color: #00144F;
+}
+.btn-check:focus + .btn-outline-primary,
+.btn-outline-primary:focus {
+  box-shadow: 0 0 0 0.25rem rgba(0, 20, 79, 0.5);
+}
+.btn-check:checked + .btn-outline-primary,
+.btn-check:active + .btn-outline-primary,
+.btn-outline-primary:active,
+.btn-outline-primary.active,
+.btn-outline-primary.dropdown-toggle.show {
+  color: #fff;
+  background-color: #00144F;
+  border-color: #00144F;
+}
+.btn-outline-primary:disabled,
+.btn-outline-primary.disabled {
+  color: #00144F;
+  background-color: transparent;
+}
+
+/* ─── Focus states ───────────────────────────────────────── */
+.btn-check:focus + .btn,
+.btn:focus {
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem rgba(0, 20, 79, 0.25);
+}
+.form-control:focus {
+  border-color: #4d6aa5;
+  box-shadow: 0 0 0 0.25rem rgba(0, 20, 79, 0.25);
+}
+.form-select:focus {
+  border-color: #4d6aa5;
+  box-shadow: 0 0 0 0.25rem rgba(0, 20, 79, 0.25);
+}
+.form-check-input:focus {
+  border-color: #4d6aa5;
+  box-shadow: 0 0 0 0.25rem rgba(0, 20, 79, 0.25);
+}
+
+/* ─── Barra de progresso ──────────────────────────────────── */
+.progress-bar { background-color: #00144F; }
+
+/* ─── Linha decorativa (typo-space-line) ─────────────────── */
+.typo-space-line::after,
+.typo-space-line-center::after {
+  border-bottom-color: #00144F;
+}
+
+/* ─── Parceiros (about page) ──────────────────────────────── */
+.partner-wap { background-color: #00144F; }
+.partner-wap:hover { background-color: #001a6b; }
+
+/* ─── Gradiente hover dos cards de serviço ────────────────── */
+.recent-work .recent-work-vertical {
+  background: linear-gradient(
+    0deg,
+    rgba(255,255,255,1) 0%,
+    rgba(255,255,255,0) 33.333%,
+    rgba(0,20,79,1) 66.666%,
+    rgba(255,255,255,0) 99.999%
+  );
+  background-size: 300% 300%;
+  background-position: 0% 100%;
+  transition: .5s;
+  cursor: pointer;
+}
+
+/* ─── Navbar ─────────────────────────────────────────────── */
+#main_nav .nav-item .nav-link:hover { color: #fff; }
+
+/* ─── Logo ajuste ────────────────────────────────────────── */
+.navbar-brand img { max-height: 48px; width: auto; }
+footer .navbar-brand img { max-height: 44px; width: auto; }
+
+/* ─── Hero banner overlay para legibilidade ──────────────── */
+#index_banner {
+  position: relative;
+}
+#index_banner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0,20,79,0.82) 0%, rgba(83,83,81,0.45) 100%);
+  z-index: 1;
+}
+#index_banner .carousel,
+#index_banner .carousel-inner,
+#index_banner .carousel-item {
+  position: relative;
+  z-index: 2;
+}
+#index_banner .carousel-control-prev,
+#index_banner .carousel-control-next {
+  z-index: 3;
+}
+#index_banner .carousel-indicators {
+  z-index: 3;
+}
+#index_banner .banner-heading { color: #ffffff !important; text-shadow: 0 2px 8px rgba(0,0,0,0.4); }
+#index_banner .banner-body    { color: rgba(255,255,255,0.88) !important; }
+#index_banner .banner-button  { color: #ffffff; border-color: #ffffff; }
+#index_banner .banner-button:hover { background-color: #00144F; border-color: #00144F; color: #fff; }
+
+/* ─── Ícone de destaque nos cards ────────────────────────── */
+.icon-feature {
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  background: #00144F;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+.icon-feature i { font-size: 1.8rem; color: #fff; }
+
+/* ─── Badge 24/7 ─────────────────────────────────────────── */
+.badge-suporte {
+  display: inline-block;
+  background: #00144F;
+  color: #fff;
+  padding: .4em .85em;
+  border-radius: 50px;
+  font-size: .82rem;
+  font-weight: 600;
+}
+
+/* ─── Cards de serviço — altura fixa, imagem não estica ──── */
+.service-work.card {
+  height: 260px;
+}
+.service-work .card-img {
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ─── Cards de setores atendidos — altura fixa ───────────── */
+.recent-work.card {
+  height: 300px;
+}
+.recent-work .recent-work-img {
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ─── Imagem principal do work-single ───────────────────── */
+#templatemo-slide-link-target img {
+  height: 400px;
+  width: 100%;
+  object-fit: cover;
+}
+
+/* ─── Miniaturas do carrossel no work-single ─────────────── */
+.worksingle-slide-footer .img-fluid {
+  height: 100px;
+  width: 100%;
+  object-fit: cover;
+}
+
+/* ─── Cards de posts relacionados ───────────────────────── */
+.related-img {
+  height: 180px;
+  object-fit: cover;
+}
+
+/* ─── Card produto Telenova Phone ─────────────────────────── */
+.product-feature-card {
+  border-radius: 16px;
+  border: 2px solid #e8eaf0;
+  transition: border-color .3s, box-shadow .3s;
+}
+.product-feature-card:hover {
+  border-color: #00144F;
+  box-shadow: 0 8px 24px rgba(0,20,79,0.15);
+}
