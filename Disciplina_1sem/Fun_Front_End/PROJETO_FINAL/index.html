@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+
+<head>
+  <title>Telenova Tecnologia — Soluções Corporativas de TI, Telefonia e Segurança</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description"
+    content="Telenova Tecnologia: soluções gerenciadas de TI, telefonia em nuvem e segurança eletrônica para empresas. Com sede em Cuiabá, MT.">
+  <link rel="apple-touch-icon" href="assets/img/logos/Logotipo-Telenova.png">
+  <link rel="shortcut icon" type="image/png" href="assets/img/logos/Logotipo-Telenova.png">
+
+  <!-- Google Fonts & Tailwind CDN -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .carousel-container {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+    }
+
+    .carousel-container::-webkit-scrollbar {
+      display: none;
+    }
+
+    .carousel-item {
+      flex: 0 0 100%;
+      scroll-snap-align: start;
+    }
+  </style>
+</head>
+
+<body class="bg-slate-50 text-slate-800 antialiased">
+  <header class="sticky top-0 z-50 bg-white border-b border-slate-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <a href="index.html" class="flex-shrink-0">
+        <img src="assets/img/logos/Logotipo-Telenova.png" alt="Telenova Tecnologia" class="h-10 w-auto">
+      </a>
+
+      <nav class="hidden md:flex space-x-8 text-sm font-medium">
+        <a href="index.html" class="text-blue-600 border-b-2 border-blue-600 pb-1">Home</a>
+        <a href="servicos.html" class="text-slate-500 hover:text-slate-900 transition-colors">Serviços</a>
+        <a href="Telenova_Phone.html" class="text-slate-500 hover:text-slate-900 transition-colors">Telenova Phone</a>
+        <a href="sobre.html" class="text-slate-500 hover:text-slate-900 transition-colors">Quem Somos</a>
+        <a href="contato.html" class="text-slate-500 hover:text-slate-900 transition-colors">Contato</a>
+      </nav>
+
+      <div class="hidden md:block">
+        <a href="contato.html"
+          class="inline-flex items-center justify-center px-5 py-2.5 text-sm font-medium text-white bg-blue-600 rounded-full hover:bg-blue-700 transition-colors">
+          Fale Conosco
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Carrossel -->
+  <section class="relative bg-slate-900 border-b border-slate-100">
+    <div class="carousel-container" id="hero-carousel">
+      <!-- Slide 1 -->
+      <div class="carousel-item bg-cover bg-center relative py-20 px-4 sm:px-6 lg:px-8"
+        style="background-image: linear-gradient(to right, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.6)), url('assets/img/telefonia-digital-l5-networks-b.webp');">
+        <div class="max-w-4xl mx-auto py-12 relative z-10">
+          <h1 class="text-3xl sm:text-5xl font-light text-white tracking-tight leading-tight">
+            Conectando sua empresa<br>
+            <strong class="font-semibold text-blue-400">ao futuro da comunicação</strong>
+          </h1>
+          <p class="mt-6 text-base sm:text-lg text-slate-300 max-w-2xl leading-relaxed">
+            Transformamos tecnologia complexa em serviços gerenciados de alta performance para o seu negócio — com
+            segurança, escalabilidade e suporte 24/7.
+          </p>
+          <div class="mt-10">
+            <a href="work.html"
+              class="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-white bg-blue-600 rounded-full hover:bg-blue-700 transition-colors shadow-sm">
+              Conheça nossas soluções
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 2 -->
+      <div class="carousel-item bg-cover bg-center relative py-20 px-4 sm:px-6 lg:px-8"
+        style="background-image: linear-gradient(to right, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.6)), url('assets/img/data-centers-1-l.jpg');">
+        <div class="max-w-4xl mx-auto py-12 relative z-10">
+          <h1 class="text-3xl sm:text-5xl font-light text-white tracking-tight leading-tight">
+            Suporte contínuo para<br>
+            <strong class="font-semibold text-blue-400">uma rede que nunca para</strong>
+          </h1>
+          <p class="mt-6 text-base sm:text-lg text-slate-300 max-w-2xl leading-relaxed">
+            Operação de suporte 24/7: monitoramento contínuo e resolução proativa de problemas para garantir a
+            disponibilidade total da sua infraestrutura.
+          </p>
+          <div class="mt-10">
+            <a href="contact.html"
+              class="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-white bg-blue-600 rounded-full hover:bg-blue-700 transition-colors shadow-sm">
+              Fale com um especialista
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 3 -->
+      <div class="carousel-item bg-cover bg-center relative py-20 px-4 sm:px-6 lg:px-8"
+        style="background-image: linear-gradient(to right, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.6)), url('assets/img/DTI-recebe-empresa-Algar-telefones-digitais-Dani-Fernandes_PML-3.webp');">
+        <div class="max-w-4xl mx-auto py-12 relative z-10">
+          <h1 class="text-3xl sm:text-5xl font-light text-white tracking-tight leading-tight">
+            Cuiabá, MT — no centro<br>
+            <strong class="font-semibold text-blue-400">da inovação regional</strong>
+          </h1>
+          <p class="mt-6 text-base sm:text-lg text-slate-300 max-w-2xl leading-relaxed">
+            Com sede em Cuiabá, unimos tecnologia de ponta às demandas do agronegócio e do mercado corporativo do
+            Centro-Oeste. Conectividade local, alcance global.
+          </p>
+          <div class="mt-10">
+            <a href="about.html"
+              class="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-white bg-blue-600 rounded-full hover:bg-blue-700 transition-colors shadow-sm">
+              Nossa história
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Controles Indicadores -->
+    <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex space-x-2 z-20">
+      <button onclick="document.getElementById('hero-carousel').scrollTo({left: 0, behavior: 'smooth'})"
+        class="w-2.5 h-2.5 rounded-full bg-slate-500 hover:bg-white transition-colors"></button>
+      <button onclick="document.getElementById('hero-carousel').scrollTo({left: window.innerWidth, behavior: 'smooth'})"
+        class="w-2.5 h-2.5 rounded-full bg-slate-500 hover:bg-white transition-colors"></button>
+      <button
+        onclick="document.getElementById('hero-carousel').scrollTo({left: window.innerWidth * 2, behavior: 'smooth'})"
+        class="w-2.5 h-2.5 rounded-full bg-slate-500 hover:bg-white transition-colors"></button>
+    </div>
+  </section>
+
+  <!-- Serviços -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <h2 class="text-xs font-semibold text-blue-600 uppercase tracking-widest">Nossos Serviços</h2>
+      <p class="mt-3 text-3xl font-semibold text-slate-900 sm:text-4xl">Pilares técnicos da sua empresa</p>
+      <p class="mt-4 text-base text-slate-500 leading-relaxed">
+        Da telefonia corporativa à segurança eletrônica, oferecemos serviços gerenciados end-to-end. Cada solução é
+        projetada para reduzir custos operacionais e maximizar a disponibilidade do seu negócio.
+      </p>
+    </div>
+
+    <!-- Filtros -->
+    <div class="flex flex-wrap justify-center gap-2 mb-12">
+      <button onclick="filterProjects('all')"
+        class="px-5 py-1.5 text-sm font-medium bg-blue-600 text-white rounded-full transition-colors">Todos</button>
+      <button onclick="filterProjects('telefonia')"
+        class="px-5 py-1.5 text-sm font-medium bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 rounded-full transition-colors">Telefonia</button>
+      <button onclick="filterProjects('redes')"
+        class="px-5 py-1.5 text-sm font-medium bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 rounded-full transition-colors">Redes</button>
+      <button onclick="filterProjects('seguranca')"
+        class="px-5 py-1.5 text-sm font-medium bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 rounded-full transition-colors">Segurança</button>
+    </div>
+
+    <!-- Grid de Cards Modificados -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="projects-grid">
+      <!-- Card 1 -->
+      <div
+        class="project-card bg-white border border-slate-150 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow"
+        data-category="telefonia">
+        <img class="w-full h-48 object-cover"
+          src="assets/img/PABX em Nuvem com IA Revolução da Telefonia Empresarial.jpg" alt="Cloud PABX">
+        <div class="p-5">
+          <span class="text-[10px] font-semibold text-blue-600 uppercase tracking-wider block mb-2">Telefonia IP</span>
+          <p class="text-sm text-slate-700 font-medium">Cloud PABX — central virtual escalável, sem hardware físico</p>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div
+        class="project-card bg-white border border-slate-150 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow"
+        data-category="redes">
+        <img class="w-full h-48 object-cover" src="assets/img/diferenca-entre-tecnologias-e-redes-wireless.webp"
+          alt="Infraestrutura de Redes">
+        <div class="p-5">
+          <span
+            class="text-[10px] font-semibold text-blue-600 uppercase tracking-wider block mb-2">Infraestrutura</span>
+          <p class="text-sm text-slate-700 font-medium">Projetos de redes para alto fluxo de dados e disponibilidade</p>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div
+        class="project-card bg-white border border-slate-150 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow"
+        data-category="seguranca">
+        <img class="w-full h-48 object-cover"
+          src="assets/img/blog-central-telefonica-o-que-voce-precisa-saber-12b4cfc100.png" alt="Segurança Eletrônica">
+        <div class="p-5">
+          <span class="text-[10px] font-semibold text-blue-600 uppercase tracking-wider block mb-2">Segurança</span>
+          <p class="text-sm text-slate-700 font-medium">Monitoramento e controle de acesso integrados à rede de TI</p>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div
+        class="project-card bg-white border border-slate-150 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow"
+        data-category="redes">
+        <img class="w-full h-48 object-cover" src="assets/img/data-centers-1-l.jpg" alt="Hospedagem Gerenciada">
+        <div class="p-5">
+          <span class="text-[10px] font-semibold text-blue-600 uppercase tracking-wider block mb-2">Cloud Hosting</span>
+          <p class="text-sm text-slate-700 font-medium">Servidores de alta disponibilidade para bancos de dados
+            corporativos</p>
+        </div>
+      </div>
+
+      <!-- Card 5 -->
+      <div
+        class="project-card bg-white border border-slate-150 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow"
+        data-category="telefonia">
+        <img class="w-full h-48 object-cover" src="assets/img/telefonia-digital-l5-networks-b.webp"
+          alt="VoIP Agronegócio">
+        <div class="p-5">
+          <span class="text-[10px] font-semibold text-blue-600 uppercase tracking-wider block mb-2">VoIP & Agro</span>
+          <p class="text-sm text-slate-700 font-medium">Conectividade e telefonia adaptadas ao campo e ao agronegócio
+          </p>
+        </div>
+      </div>
+
+      <!-- Card 6 -->
+      <div
+        class="project-card bg-white border border-slate-150 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow"
+        data-category="seguranca">
+        <img class="w-full h-48 object-cover"
+          src="assets/img/DTI-recebe-empresa-Algar-telefones-digitais-Dani-Fernandes_PML-3.webp"
+          alt="Monitoramento 24/7">
+        <div class="p-5">
+          <span class="text-[10px] font-semibold text-blue-600 uppercase tracking-wider block mb-2">Monitoramento
+            24/7</span>
+          <p class="text-sm text-slate-700 font-medium">Suporte contínuo e resolução proativa para sua infraestrutura
+          </p>
+        </div>
+      </div>
+
+      <!-- Card 7 -->
+      <div
+        class="project-card bg-white border border-slate-150 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow"
+        data-category="telefonia">
+        <img class="w-full h-48 object-cover" src="assets/img/operadora-de-telefonia.jpg" alt="Automação e IA">
+        <div class="p-5">
+          <span class="text-[10px] font-semibold text-blue-600 uppercase tracking-wider block mb-2">Automação &
+            IA</span>
+          <p class="text-sm text-slate-700 font-medium">Chatbots inteligentes para triagem e suporte ágil ao cliente</p>
+        </div>
+      </div>
+
+      <!-- Card 8 -->
+      <div
+        class="project-card bg-white border border-slate-150 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow"
+        data-category="telefonia">
+        <img class="w-full h-48 object-cover"
+          src="assets/img/blog-central-telefonica-o-que-voce-precisa-saber-12b4cfc100.png" alt="Telenova Phone">
+        <div class="p-5">
+          <span class="text-[10px] font-semibold text-blue-600 uppercase tracking-wider block mb-2">Telenova
+            Phone</span>
+          <p class="text-sm text-slate-700 font-medium">Softphone corporativo — VoIP de alta qualidade em qualquer
+            dispositivo</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="bg-slate-950 text-white py-16">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h3 class="text-xl font-light text-slate-300">Com sede em Cuiabá, conectividade de alcance global</h3>
+      <p class="mt-4 text-base italic text-slate-400 max-w-3xl mx-auto">
+        "A Telenova Tecnologia combina segurança eletrônica física com conectividade digital em nuvem, eliminando a
+        lacuna entre as necessidades locais e a inovação global."
+      </p>
+      <div class="mt-8">
+
+        <a href="work.html"
+          class="inline-flex items-center justify-center px-6 py-2.5 text-sm font-medium bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors">
+
+          Ver Todos os Serviços
+
+        </a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- Setores Atendidos -->
+
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+
+    <div class="text-center mb-16">
+
+      <h2 class="text-2xl font-semibold text-slate-900 sm:text-3xl tracking-tight">Setores Atendidos</h2>
+
+    </div>
+
+
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+
+      <!-- Setor 1 -->
+
+      <div class="group relative rounded-2xl overflow-hidden bg-slate-900 h-64 shadow-sm">
+
+        <img class="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-300"
+          src="assets/img/TELEFONIA sistema de transmissão de vozes a distância via cabos, fios ou ondas.webp"
+          alt="Agronegócio">
+
+        <div
+          class="absolute inset-0 p-6 flex flex-col justify-end bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent">
+
+          <h3 class="text-lg font-semibold text-white">Agronegócio</h3>
+
+          <p class="text-xs text-slate-300 mt-1">Redes locais, VoIP e segurança para fazendas e cooperativas</p>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- Setor 2 -->
+
+      <div class="group relative rounded-2xl overflow-hidden bg-slate-900 h-64 shadow-sm">
+
+        <img class="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-300"
+          src="assets/img/operadora-de-telefonia.jpg" alt="Saúde">
+
+        <div
+          class="absolute inset-0 p-6 flex flex-col justify-end bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent">
+
+          <h3 class="text-lg font-semibold text-white">Saúde</h3>
+
+          <p class="text-xs text-slate-300 mt-1">Infraestrutura segura e LGPD compliant para clínicas e hospitais</p>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- Setor 3 -->
+
+      <div class="group relative rounded-2xl overflow-hidden bg-slate-900 h-64 shadow-sm">
+
+        <img class="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-300"
+          src="assets/img/telefonia-fixa-movel.jpg" alt="Financeiro">
+
+        <div
+          class="absolute inset-0 p-6 flex flex-col justify-end bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent">
+
+          <h3 class="text-lg font-semibold text-white">Setor Financeiro</h3>
+
+          <p class="text-xs text-slate-300 mt-1">Alta disponibilidade e segurança eletrônica para bancos e fintechs</p>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- Setor 4 -->
+
+      <div class="group relative rounded-2xl overflow-hidden bg-slate-900 h-64 shadow-sm">
+
+        <img class="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-300"
+          src="assets/img/operadora-de-telefonia.jpg" alt="Varejo">
+
+        <div
+          class="absolute inset-0 p-6 flex flex-col justify-end bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent">
+
+          <h3 class="text-lg font-semibold text-white">Varejo</h3>
+
+          <p class="text-xs text-slate-300 mt-1">Telefonia corporativa e monitoramento para lojas e redes varejistas</p>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- Setor 5 -->
+
+      <div class="group relative rounded-2xl overflow-hidden bg-slate-900 h-64 shadow-sm">
+
+        <img class="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-300"
+          src="assets/img/Popula%C3%A7%C3%A3o%20pode%20reclamar%20de%20servi%C3%A7os%20de%20telefonia%20celular%20em%20Mutir%C3%A3o%20de%20Atendimento%20ao.jpg"
+          alt="Indústria">
+
+        <div
+          class="absolute inset-0 p-6 flex flex-col justify-end bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent">
+
+          <h3 class="text-lg font-semibold text-white">Indústria</h3>
+
+          <p class="text-xs text-slate-300 mt-1">Redes industriais robustas e controle de acesso integrado</p>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- Setor 6 -->
+
+      <div class="group relative rounded-2xl overflow-hidden bg-slate-900 h-64 shadow-sm">
+
+        <img class="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-300"
+          src="assets/img/diferenca-entre-tecnologias-e-redes-wireless.webp" alt="Educação">
+
+        <div
+          class="absolute inset-0 p-6 flex flex-col justify-end bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent">
+
+          <h3 class="text-lg font-semibold text-white">Educação</h3>
+
+          <p class="text-xs text-slate-300 mt-1">Conectividade e telefonia para instituições de ensino</p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- Footer Minimalista -->
+
+  <footer class="bg-slate-950 border-t border-slate-800 text-slate-300 text-sm">
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 grid grid-cols-1 md:grid-cols-4 gap-8">
+
+      <div>
+
+        <img src="assets/img/logos/Logotipo-Telenova-white.png" alt="Telenova Tecnologia" class="h-8 w-auto mb-4">
+
+        <p class="text-xs text-slate-400 leading-relaxed">
+
+          Com sede em Cuiabá, a Telenova Tecnologia combina segurança eletrônica física com conectividade digital em
+          nuvem.
+
+        </p>
+
+      </div>
+
+      <div>
+
+        <h4 class="font-semibold text-white mb-3">A Empresa</h4>
+
+        <ul class="space-y-2 text-xs">
+
+          <li><a href="index.html" class="text-slate-300 hover:text-blue-400">Home</a></li>
+
+          <li><a href="about.html" class="text-slate-300 hover:text-blue-400">Quem Somos</a></li>
+
+          <li><a href="work.html" class="text-slate-300 hover:text-blue-400">Serviços</a></li>
+
+        </ul>
+
+      </div>
+
+      <div>
+
+        <h4 class="font-semibold text-white mb-3">Nossos Serviços</h4>
+
+        <ul class="space-y-2 text-xs">
+
+          <li><a href="work.html" class="text-slate-300 hover:text-blue-400">Telefonia IP & Cloud PABX</a></li>
+
+          <li><a href="work.html" class="text-slate-300 hover:text-blue-400">Infraestrutura de Redes</a></li>
+
+          <li><a href="work.html" class="text-slate-300 hover:text-blue-400">Segurança Eletrônica</a></li>
+
+          <li><a href="work.html" class="text-slate-300 hover:text-blue-400">Hospedagem Gerenciada</a></li>
+
+          <li><a href="work.html" class="text-slate-300 hover:text-blue-400">Automação e IA</a></li>
+
+        </ul>
+
+      </div>
+
+      <div>
+
+        <h4 class="font-semibold text-white mb-3">Suporte</h4>
+
+        <p class="text-xs text-slate-400 mb-1">(65) 0000-0000</p>
+
+        <p class="text-xs text-slate-400 mb-3">suporte@telenova.com.br</p>
+
+        <span
+          class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-900 text-green-300 border border-green-700">Suporte
+          24/7</span>
+
+      </div>
+
+    </div>
+
+    <div class="bg-slate-900 py-4 border-t border-slate-800 text-center text-xs text-slate-400">
+
+      © 2025 Telenova Tecnologia. Todos os direitos reservados.
+
+    </div>
+
+  </footer>
+
+
+
+  <!-- Lógica Simples de Filtro -->
+
+  <script>
+
+    function filterProjects(category) {
+
+      const cards = document.querySelectorAll('.project-card');
+
+      cards.forEach(card => {
+
+        if (category === 'all' || card.getAttribute('data-category') === category) {
+
+          card.style.display = 'block';
+
+        } else {
+
+          card.style.display = 'none';
+
+        }
+
+      });
+
+    }
+
+  </script>
+
+</body>
+
+</html>
