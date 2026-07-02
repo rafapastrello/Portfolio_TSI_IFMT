@@ -12,8 +12,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <meta name="description"
-    content="Entre em contato com a Telenova Tecnologia. Cuiabá, MT. suporte@telenova.com.br">
+  <meta name="description" content="Entre em contato com a Telenova Tecnologia. Cuiabá, MT. suporte@telenova.com.br">
 
 
 
@@ -280,137 +279,79 @@
       <!-- Formulário -->
 
       <div class="lg:col-span-2">
-
-        <form class="bg-white border border-slate-100 rounded-2xl p-8 shadow-sm space-y-5"
-          id="contactForm" method="post" action="https://formspree.io/f/xwvjkreq">
-
-
+        <form class="bg-white border border-slate-100 rounded-2xl p-8 shadow-sm space-y-5" id="contactForm"
+          method="post" action="https://formspree.io/f/xwvjkreq" role="form">
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-
             <div>
-
-              <label for="inputname" class="block text-xs font-medium text-slate-600 mb-1.5">Nome completo</label>
-
-              <input type="text" id="inputname" name="inputname" placeholder="João Silva"
+              <label for="floatingname" class="block text-xs font-medium text-slate-600 mb-1.5">Nome completo</label>
+              <input type="text" id="floatingname" name="inputname" placeholder="Nome"
                 class="w-full px-4 py-3 text-sm border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-slate-50">
-
             </div>
-
             <div>
-
-              <label for="inputemail" class="block text-xs font-medium text-slate-600 mb-1.5">E-mail corporativo</label>
-
-              <input type="email" id="inputemail" name="inputemail" placeholder="joao@empresa.com.br"
+              <label for="floatingemail" class="block text-xs font-medium text-slate-600 mb-1.5">E-mail
+                corporativo</label>
+              <input type="email" id="floatingemail" name="inputemail" placeholder="E-mail"
                 class="w-full px-4 py-3 text-sm border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-slate-50">
-
             </div>
-
           </div>
 
-
-
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-
             <div>
-
-              <label for="inputphone" class="block text-xs font-medium text-slate-600 mb-1.5">Telefone /
+              <label for="floatingphone" class="block text-xs font-medium text-slate-600 mb-1.5">Telefone /
                 WhatsApp</label>
-
-              <input type="tel" id="inputphone" name="inputphone" placeholder="(65) 99999-9999"
+              <input type="tel" id="floatingphone" name="inputphone" placeholder="Telefone"
                 class="w-full px-4 py-3 text-sm border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-slate-50">
-
             </div>
-
             <div>
-
-              <label for="inputcompany" class="block text-xs font-medium text-slate-600 mb-1.5">Nome da empresa</label>
-
-              <input type="text" id="inputcompany" name="inputcompany" placeholder="Empresa Ltda."
+              <label for="floatingcompany" class="block text-xs font-medium text-slate-600 mb-1.5">Nome da
+                empresa</label>
+              <input type="text" id="floatingcompany" name="inputcompany" placeholder="Empresa"
                 class="w-full px-4 py-3 text-sm border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-slate-50">
-
             </div>
-
           </div>
 
-
-
           <div>
-
-            <label for="inputsubject" class="block text-xs font-medium text-slate-600 mb-1.5">Assunto</label>
-
-            <select id="inputsubject" name="inputsubject"
+            <label for="floatingsubject" class="block text-xs font-medium text-slate-600 mb-1.5">Assunto</label>
+            <select id="floatingsubject" name="inputsubject"
               class="w-full px-4 py-3 text-sm border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-slate-50 text-slate-600">
-
               <option value="">Selecione o assunto</option>
-
               <option>Telefonia IP & Cloud PABX</option>
-
               <option>Infraestrutura de Redes</option>
-
               <option>Segurança Eletrônica</option>
-
               <option>Hospedagem Gerenciada</option>
-
               <option>Telenova Phone</option>
-
               <option>Automação e IA</option>
-
               <option>Suporte Técnico</option>
-
               <option>Outro assunto</option>
-
             </select>
-
           </div>
-
-
 
           <div>
-
-            <label for="mensagem" class="block text-xs font-medium text-slate-600 mb-1.5">Como podemos ajudar?</label>
-
-            <textarea id="mensagem" name="mensagem" rows="5" placeholder="Descreva sua necessidade..."
+            <label for="floatingtextarea" class="block text-xs font-medium text-slate-600 mb-1.5">Como podemos
+              ajudar?</label>
+            <textarea id="floatingtextarea" name="mensagem" rows="5" placeholder="Descreva sua necessidade"
               class="w-full px-4 py-3 text-sm border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-slate-50 resize-none"></textarea>
-
           </div>
-
-
 
           <input type="hidden" name="_replyto" id="replyto-hidden">
 
-
-
           <div id="form-success"
             class="hidden p-4 bg-green-50 border border-green-200 rounded-xl text-sm text-green-700">
-
             Mensagem enviada com sucesso! Retornaremos em breve.
-
           </div>
-          <div id="form-error"
-            class="hidden p-4 bg-red-50 border border-red-200 rounded-xl text-sm text-red-700">
-
+          <div id="form-error" class="hidden p-4 bg-red-50 border border-red-200 rounded-xl text-sm text-red-700">
             Erro ao enviar. Tente novamente ou entre em contato por e-mail.
-
           </div>
-
-
 
           <div class="flex justify-end">
-
-            <button type="submit"
+            <button type="submit" id="btn-enviar"
               class="inline-flex items-center justify-center px-7 py-3 text-sm font-medium text-white bg-blue-600 rounded-full hover:bg-blue-700 transition-colors shadow-sm">
-
               Enviar mensagem
-
             </button>
-
           </div>
 
-
-
         </form>
-
       </div>
 
     </div>
@@ -499,7 +440,62 @@
   </footer>
 
 
+  <script>
+    // 1. Pegamos o formulário pelo ID dele
+    var formulario = document.getElementById("contactForm");
 
+    // 2. Criamos uma função que vai rodar quando o usuário tentar enviar o formulário
+    formulario.onsubmit = function (evento) {
+
+      // Pegamos os valores de cada campo do formulário
+      var nome = document.getElementById("floatingname").value;
+      var email = document.getElementById("floatingemail").value;
+      var telefone = document.getElementById("floatingphone").value;
+      var empresa = document.getElementById("floatingcompany").value;
+      var assunto = document.getElementById("floatingsubject").value;
+      var mensagem = document.getElementById("floatingtextarea").value;
+
+      // 3. Verificamos se algum campo obrigatório está vazio
+      if (nome == "") {
+        alert("Por favor, preencha o seu nome.");
+        evento.preventDefault(); // Impede o formulário de ser enviado
+        return false;
+      }
+
+      if (email == "") {
+        alert("Por favor, preencha o seu e-mail.");
+        evento.preventDefault();
+        return false;
+      }
+
+      if (telefone == "") {
+        alert("Por favor, preencha o seu telefone.");
+        evento.preventDefault();
+        return false;
+      }
+
+      if (empresa == "") {
+        alert("Por favor, preencha o nome da sua empresa.");
+        evento.preventDefault();
+        return false;
+      }
+
+      if (assunto == "") {
+        alert("Por favor, selecione um assunto.");
+        evento.preventDefault();
+        return false;
+      }
+
+      if (mensagem == "") {
+        alert("Por favor, escreva a sua mensagem.");
+        evento.preventDefault();
+        return false;
+      }
+
+      // Se passou por todos os "ifs", o formulário segue o envio normal para o Formspree
+      alert("Tudo certo! Enviando sua mensagem...");
+    };
+  </script>
 </body>
 
 </html>
